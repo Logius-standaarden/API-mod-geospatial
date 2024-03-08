@@ -88,7 +88,7 @@ A simple spatial filter can be supplied as a bounding box. This is a common way 
   </p>
   <h4 class="rulelab">How to test</h4>
   <ul>
-    <li>Issue an HTTP GET request to the API, including the <code>bbox</code> query parameter and using <a href="https://docs.geostandaarden.nl/api/API-Strategie-mod-geo/#crs-negotiation">CRS Negotiation</a>.</li>
+    <li>Issue an HTTP GET request to the API, including the <code>bbox</code> query parameter and using <a href="#crs-negotiation">CRS Negotiation</a>.</li>
     <li>Validate that a response with status code 200 is returned.</li>
     <li>Verify that only features that have a spatial geometry that intersects the bounding box are returned as part of the result set.</li>
   </ul>
@@ -106,7 +106,7 @@ More complex spatial filtering is not addressed in this module. A new API Design
 However, until the filtering module is written, the geospatial module retains rule <a href="#/geo/geometric-context">/geo/geometric-context</a> about dealing with results of a global spatial query. This rule may be moved to the filtering module at a later stage.
 </aside>
 
-<a name="api-38"></a>
+<span name="api-38"></span>
 <div class="rule" id="/geo/geometric-context">
   <p class="rulelab"><b>/geo/geometric-context</b>: Place results of a global spatial query in the relevant geometric context</p>
   <p>In case of a global query <code>/api/v1/_search</code>, results should be placed in the relevant geometric context, because results from different <a href="https://publicatie.centrumvoorstandaarden.nl/api/adr/#resources">collections</a>, i.e. different sets of resources of the same type, are retrieved. Express the name of the collection to which the results belong in the singular form using the property <code>type</code>. For example:</p>
@@ -147,7 +147,7 @@ However, until the filtering module is written, the geospatial module retains ru
 
 In case a REST API shall comply to the OGC API Features specification for creating, updating and deleting a resource, the following applies.
 
-<a name="api-34"></a>
+<span name="api-34"></span>
 <div class="rule" id="/geo/geojson-request">
   <p class="rulelab"><b>/geo/geojson-request</b>: Support GeoJSON in geospatial API requests</p>
   <p>For representing geometric information in an API, use the convention for describing geometry as defined in the GeoJSON format [[rfc7946]]. Support GeoJSON as described in <a href="http://docs.ogc.org/DRAFTS/20-002.html">OGC API Features part 4</a>, but note that this standard is still in development.</p>
@@ -363,7 +363,7 @@ In case a REST API does not have to comply to the OGC API Features specification
 A template for the definition of the schemas for the GeoJSON <code>Geometry</code> object in the responses in OpenAPI definitions is available: [geometryGeoJSON.yaml](https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/geometryGeoJSON.yaml).
 In case a collection of resources is returned, the name of the array containing the resources should be the plural of the resource name.
 
-<a name="api-35"></a>
+<span name="api-35"></span>
 <div class="rule" id="/geo/embed-geojson-geometry-response">
   <p class="rulelab"><b>/geo/embed-geojson-geometry-response</b>: Embed GeoJSON <code>Geometry</code> object as part of the JSON resource in API responses</p>
   <p>When a JSON (<code>application/json</code>) response contains a geometry, represent it in the same way as the <code>Geometry</code> object of GeoJSON.</p>
