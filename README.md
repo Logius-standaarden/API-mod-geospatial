@@ -1,4 +1,4 @@
-# API Design Rules Module: Transport Security
+# API Design Rules Module: Geospatial
 
 ## Deze handreiking
 
