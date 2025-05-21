@@ -1,4 +1,4 @@
-var respecConfig = {
+globalThis.respecConfig = {
     pubDomain: "api",
     shortName: "mod-geo",
     specType: "HR",
