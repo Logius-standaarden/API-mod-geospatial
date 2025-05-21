@@ -109,7 +109,7 @@ However, until the filtering module is written, the geospatial module retains ru
 <span name="api-38"></span>
 <div class="rule" id="/geo/geometric-context">
   <p class="rulelab"><b>/geo/geometric-context</b>: Place results of a global spatial query in the relevant geometric context</p>
-  <p>In case of a global query <code>/api/v1/_search</code>, results should be placed in the relevant geometric context, because results from different <a href="https://publicatie.centrumvoorstandaarden.nl/api/adr/#resources">collections</a>, i.e. different sets of resources of the same type, are retrieved. Express the name of the collection to which the results belong in the singular form using the property <code>type</code>. For example:</p>
+  <p>In case of a global query <code>/api/v1/_search</code>, results should be placed in the relevant geometric context, because results from different <a href="https://gitdocumentatie.logius.nl/publicatie/api/adr/2.0.2/#resources">collections</a>, i.e. different sets of resources of the same type, are retrieved. Express the name of the collection to which the results belong in the singular form using the property <code>type</code>. For example:</p>
   <pre class="example">
   // POST /api/v1/_search:
   {
