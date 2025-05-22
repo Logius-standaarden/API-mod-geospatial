@@ -2,7 +2,7 @@ globalThis.respecConfig = {
     pubDomain: "api",
     shortName: "mod-geo",
     specType: "HR",
-    specStatus: "DEF",
+    specStatus: "WV",
     publishDate: "2024-03-07",
     publishVersion: "1.0.2",
     previousPublishDate: "2023-05-23",
