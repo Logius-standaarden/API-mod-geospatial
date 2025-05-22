@@ -2,7 +2,7 @@ globalThis.respecConfig = {
     pubDomain: "api",
     shortName: "mod-geo",
     specType: "HR",
-    specStatus: "DEF",
+    specStatus: "WV",
     publishDate: "2024-03-07",
     publishVersion: "1.0.2",
     previousPublishDate: "2023-05-23",
@@ -60,7 +60,7 @@ globalThis.respecConfig = {
             version: "1.0"
         },
         "ogcapi-features-3": {
-            href: "http://docs.ogc.org/DRAFTS/19-079r1.html",
+            href: "https://docs.ogc.org/is/19-079r2/19-079r2.html",
             title: "OGC API - Features - Part 3: Filtering",
             editors: ["Panagiotis (Peter) A. Vretanos", "Clemens Portele"],
             status: "Draft",
