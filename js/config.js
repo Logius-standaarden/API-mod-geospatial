@@ -3,10 +3,10 @@ globalThis.respecConfig = {
     shortName: "mod-geo",
     specType: "HR",
     specStatus: "DEF",
-    publishDate: "2024-03-07",
-    publishVersion: "1.0.2",
-    previousPublishDate: "2023-05-23",
-    previousPublishVersion: "1.0.1",
+    publishDate: "2025-05-22",
+    publishVersion: "1.0.3",
+    previousPublishDate: "2024-03-07",
+    previousPublishVersion: "1.0.2",
     previousMaturity: "DEF",
     editors: [{
         name: "Linda van den Brink",
@@ -60,7 +60,7 @@ globalThis.respecConfig = {
             version: "1.0"
         },
         "ogcapi-features-3": {
-            href: "http://docs.ogc.org/DRAFTS/19-079r1.html",
+            href: "https://docs.ogc.org/is/19-079r2/19-079r2.html",
             title: "OGC API - Features - Part 3: Filtering",
             editors: ["Panagiotis (Peter) A. Vretanos", "Clemens Portele"],
             status: "Draft",
