@@ -359,6 +359,7 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
     <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
     <li>Validate that the returned document is a JSON document.</li>
   </ul>
+
 </div>
 
 In case a REST API does not have to comply to the OGC API Features specification, e.g. for usage in administrative applications, the REST API shall use the JSON data format. If resources contain geometry, the geometry shall be returned as a GeoJSON <code>Geometry</code> object embedded in the resource. The media type <code>application/json</code>  must be supported. This may also apply to other media types <code>application/\*+json</code>, however this depends on the media type specification. If the media type specification prescribes that resource information must be embedded in a JSON structure defined in the media type specification, then the media type should not be supported while it is impossible to comply to that specification with the method described below. The media type <code>application/geo+json</code> should not be supported while the resource does not comply to the GeoJSON specification, i.e. the response does not return a feature or feature collection.
@@ -520,4 +521,5 @@ In case a collection of resources is returned, the name of the array containing 
       </ul>
     </li>
   </ul>
+
 </div>
