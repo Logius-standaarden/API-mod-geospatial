@@ -514,9 +514,10 @@ In case a collection of resources is returned, the name of the array containing 
     <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
     <li>Validate that the returned document is a JSON document.</li>
     <li>Validate that the returned document contains an array of resources and that each resource contains a  property that complies to the GeoJSON <code>Geometry</code> object mentioned above and contains:
-    <ul>
-      <li>a property <code>type</code> containing the name of the GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code>, and</li>
-      <li>a property <code>geometries</code> containing an array of GeoJSON <code>Geometry</code> objects.</li>
-    </ul></li>
+      <ul>
+        <li>a property <code>type</code> containing the name of the GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code>, and</li>
+        <li>a property <code>geometries</code> containing an array of GeoJSON <code>Geometry</code> objects.</li>
+      </ul>
+    </li>
   </ul>
 </div>
