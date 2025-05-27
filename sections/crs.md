@@ -211,19 +211,19 @@ Below is a list of the most commonly used CRSs in the Netherlands:
 
 | Name | Code | Type | Dimension | Scope | URI |
 |-|-|-|-|-|-|
-| Amersfoort / RD New | 28992 | easting, northing (x, y) | 2D | Dutch | http://www.opengis.net/def/crs/EPSG/9.9.1/28992 |
-| Amersfoort / RD New + NAP height | 7415 | easting, northing, height (x, y, h) | 3D | Dutch | http://www.opengis.net/def/crs/EPSG/9.9.1/7415 |
-| ETRS89 | 4258 | latitude, longitude (&#966;, &#955;) |2D | European | http://www.opengis.net/def/crs/EPSG/9.9.1/4258 |
-| ETRS89 | 4937 | latitude, longitude, height (&#966;, &#955;, h) | 3D | European | http://www.opengis.net/def/crs/EPSG/9.9.1/4937 |
-| ETRF2000 | 7931 | latitude, longitude, height (&#966;, &#955;, h) | 3D | European | http://www.opengis.net/def/crs/EPSG/9.9.1/7931 |
-| ETRF2000 | 9067 | latitude, longitude (&#966;, &#955;) | 2D | European | http://www.opengis.net/def/crs/EPSG/9.9.1/9067 |
-| ITRF2014 | 7912 | latitude, longitude, height (&#966;, &#955;, h) | 3D | Global | http://www.opengis.net/def/crs/EPSG/9.9.1/7912 |
-| ITRF2014 | 9000 | latitude, longitude (&#966;, &#955;) | 2D | Global | http://www.opengis.net/def/crs/EPSG/9.9.1/9000 |
-| WGS 84 longitude-latitude | CRS84 | longitude, latitude (&#955;, &#966;) | 2D | Global | http://www.opengis.net/def/crs/OGC/1.3/CRS84 |
-| WGS 84 longitude-latitude-height | CRS84h | longitude, latitude, height (&#955;, &#966;, h) | 3D | Global | http://www.opengis.net/def/crs/OGC/0/CRS84h |
-| WGS 84 / Pseudo-Mercator | 3857 | easting, northing (x, y) | 2D | Global | http://www.opengis.net/def/crs/EPSG/9.9.1/3857 |
+| Amersfoort / RD New | 28992 | easting, northing (x, y) | 2D | Dutch | <https://www.opengis.net/def/crs/EPSG/9.9.1/28992> |
+| Amersfoort / RD New + NAP height | 7415 | easting, northing, height (x, y, h) | 3D | Dutch | <https://www.opengis.net/def/crs/EPSG/9.9.1/7415> |
+| ETRS89 | 4258 | latitude, longitude (&#966;, &#955;) |2D | European | <https://www.opengis.net/def/crs/EPSG/9.9.1/4258> |
+| ETRS89 | 4937 | latitude, longitude, height (&#966;, &#955;, h) | 3D | European | <https://www.opengis.net/def/crs/EPSG/9.9.1/4937> |
+| ETRF2000 | 7931 | latitude, longitude, height (&#966;, &#955;, h) | 3D | European | <https://www.opengis.net/def/crs/EPSG/9.9.1/7931> |
+| ETRF2000 | 9067 | latitude, longitude (&#966;, &#955;) | 2D | European | <https://www.opengis.net/def/crs/EPSG/9.9.1/9067> |
+| ITRF2014 | 7912 | latitude, longitude, height (&#966;, &#955;, h) | 3D | Global | <https://www.opengis.net/def/crs/EPSG/9.9.1/7912> |
+| ITRF2014 | 9000 | latitude, longitude (&#966;, &#955;) | 2D | Global | <https://www.opengis.net/def/crs/EPSG/9.9.1/9000> |
+| WGS 84 longitude-latitude | CRS84 | longitude, latitude (&#955;, &#966;) | 2D | Global | <https://www.opengis.net/def/crs/OGC/1.3/CRS84> |
+| WGS 84 longitude-latitude-height | CRS84h | longitude, latitude, height (&#955;, &#966;, h) | 3D | Global | <https://www.opengis.net/def/crs/OGC/0/CRS84h> |
+| WGS 84 / Pseudo-Mercator | 3857 | easting, northing (x, y) | 2D | Global | <https://www.opengis.net/def/crs/EPSG/9.9.1/3857> |
 
-For a more extensive overview of CRSs see: https://docs.geostandaarden.nl/crs/crs/#bijlage-a-crs-overzicht-tabel.
+For a more extensive overview of CRSs see: <https://docs.geostandaarden.nl/crs/crs/#bijlage-a-crs-overzicht-tabel>.
 Note that the URI of each CRS contains a version number and that new versions may be released in future.
 Before using a URI verify if newer versions are available and use the latest version.
 

@@ -318,8 +318,9 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
   <p>
   Note that:
 
-  - The resources' properties (e.g. <code>naam</code>) are passed in the properties object. Depending on the implemented filter capabilities the properties object may contain all or a selection of the resources' properties.
-  - The OGC API Features specification provides the possibility to add an array of links to a feature and feature collection, which may contain a self link and in case of a feature collection may contain navigation links.
+- The resources' properties (e.g. <code>naam</code>) are passed in the properties object. Depending on the implemented filter capabilities the properties object may contain all or a selection of the resources' properties.
+- The OGC API Features specification provides the possibility to add an array of links to a feature and feature collection, which may contain a self link and in case of a feature collection may contain navigation links.
+
   </p>
   <h4 class="rulelab">How to test</h4>
   <p>
@@ -458,7 +459,7 @@ In case a collection of resources is returned, the name of the array containing 
   <p>
   Note that:
 
-  - The resource and resource collection may be [[HAL]] resources and therefore may contain a `_links` object. The `_links` object should contain a self link and in case of a collection also navigation links (e.g. first, next prev, last). In such cases the <code>application/hal+json</code> media type may be used.
+- The resource and resource collection may be [[HAL]] resources and therefore may contain a `_links` object. The `_links` object should contain a self link and in case of a collection also navigation links (e.g. first, next prev, last). In such cases the <code>application/hal+json</code> media type may be used.
 
   </p>
   <h4 class="rulelab">How to test</h4>
