@@ -120,32 +120,32 @@ However, until the filtering module is written, the geospatial module retains ru
       In case of a global query <code>/api/v1/_search</code>, results should be placed in the relevant geometric context, because results from different <a href="https://gitdocumentatie.logius.nl/publicatie/api/adr/2.0.2/#resources">collections</a>, i.e. different sets of resources of the same type, are retrieved. Express the name of the collection to which the results belong in the singular form using the property <code>type</code>. For example:
       <aside class="example">
         <pre><code class="json">
-          // POST /api/v1/_search:
-          {
-            "currentPage": 1,
-            "nextPage": 2,
-            "pageSize": 10,
-            "_embedded": {
-              "items": [
-                {
-                  "type": "enkelbestemming",
-                  "_links": {
-                    "self": {
-                      "href": "https://api.example.org/v1/enkelbestemmingen/1234"
-                    }
-                  }
-                },
-                {
-                  "type": "dubbelbestemming",
-                  "_links": {
-                    "self": {
-                      "href": "https://api.example.org/v1/dubbelbestemmingen/8765"
-                    }
-                  }
-                }
-              ]
-            }
+// POST /api/v1/_search:
+{
+  "currentPage": 1,
+  "nextPage": 2,
+  "pageSize": 10,
+  "_embedded": {
+    "items": [
+      {
+        "type": "enkelbestemming",
+        "_links": {
+          "self": {
+            "href": "https://api.example.org/v1/enkelbestemmingen/1234"
           }
+        }
+      },
+      {
+        "type": "dubbelbestemming",
+        "_links": {
+          "self": {
+            "href": "https://api.example.org/v1/dubbelbestemmingen/8765"
+          }
+        }
+      }
+    ]
+  }
+}
         </code></pre>
       </aside>
     </dd>
@@ -171,41 +171,41 @@ In case a REST API shall comply to the OGC API Features specification for creati
       <aside class="example">
         POST feature
         <pre><code class="json">
-          // POST /collections/gebouwen/items   HTTP/1.1
-          // Content-Type: application/geo+json
-          {
-            "type": "Feature",
-            "geometry":  {
-              "type": "Point",
-              "coordinates": [5.2795,52.1933]
-            },
-            "properties": {
-              "naam": "Paleis Soestdijk",
-              ...
-            }
-          }
+// POST /collections/gebouwen/items   HTTP/1.1
+// Content-Type: application/geo+json
+{
+  "type": "Feature",
+  "geometry":  {
+    "type": "Point",
+    "coordinates": [5.2795,52.1933]
+  },
+  "properties": {
+    "naam": "Paleis Soestdijk",
+    // ...
+  }
+}
         </code></pre>
       </aside>
       <aside class="example">
         POST feature collection
         <pre><code class="json">
-          // POST /collections   HTTP/1.1
-          // Content-Type: application/geo+json
-          {
-            "type": "FeatureCollection",
-            "features": [
-            {
-              "type": "Feature",
-              "geometry":  {
-                "type": "Point",
-                "coordinates": [5.2795,52.1933]
-              },
-              "properties": {
-                "naam": "Paleis Soestdijk",
-                ...
-              }
-            }]
-          }
+// POST /collections   HTTP/1.1
+// Content-Type: application/geo+json
+{
+  "type": "FeatureCollection",
+  "features": [
+  {
+    "type": "Feature",
+    "geometry":  {
+      "type": "Point",
+      "coordinates": [5.2795,52.1933]
+    },
+    "properties": {
+      "naam": "Paleis Soestdijk",
+      // ...
+    }
+  }]
+}
         </code></pre>
       </aside>
     </dd>
@@ -233,34 +233,34 @@ In case a collection of resources is embedded in the request resource, the name 
       <aside class="example">
         POST resource containing geometry
         <pre><code class="json">
-          // POST /collections/gebouwen/items   HTTP/1.1
-          // Content-Type: application/json
-          {
-            "naam": "Paleis Soestdijk",
-            "geometrie": {
-              "type": "Point",
-              "coordinates": [5.2795,52.1933]
-            }
-          }
+// POST /collections/gebouwen/items   HTTP/1.1
+// Content-Type: application/json
+{
+  "naam": "Paleis Soestdijk",
+  "geometrie": {
+    "type": "Point",
+    "coordinates": [5.2795,52.1933]
+  }
+}
         </code></pre>
       </aside>
       <aside class="example">
         POST resource containing geometry collection
         <pre><code class="json">
-          // POST /collections/gebouwen/items   HTTP/1.1
-          // Content-Type: application/json
-          {
-            "naam": "Paleis Soestdijk",
-            "geometrie": {
-              "type": "GeometryCollection",
-              "geometries": [
-                {
-                  "type": "Point",
-                  "coordinates": [5.2795,52.1933]
-                }
-              ]
-            }
-          }
+// POST /collections/gebouwen/items   HTTP/1.1
+// Content-Type: application/json
+{
+  "naam": "Paleis Soestdijk",
+  "geometrie": {
+    "type": "GeometryCollection",
+    "geometries": [
+      {
+        "type": "Point",
+        "coordinates": [5.2795,52.1933]
+      }
+    ]
+  }
+}
         </code></pre>
       </aside>
     </dd>
@@ -288,67 +288,67 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
       <aside class="example">
         Feature
         <pre><code class="json">
-          // GET /collections/gebouwen/items/0308100000022041   HTTP 1.1
-          // Content-type: application/geo+json
-          {
-            "type": "Feature",
-            "id": "0308100000022041",
-            "geometry":  {
-              "type": "Point",
-              "coordinates": [5.2795,52.1933]
-            },
-            "properties": {
-              "naam": "Paleis Soestdijk",
-              ...
-            },
-            "links": [
-              {
-                "self": "/collections/gebouwen/items/0308100000022041"
-              }
-            ]
-          }
+// GET /collections/gebouwen/items/0308100000022041   HTTP 1.1
+// Content-type: application/geo+json
+{
+  "type": "Feature",
+  "id": "0308100000022041",
+  "geometry":  {
+    "type": "Point",
+    "coordinates": [5.2795,52.1933]
+  },
+  "properties": {
+    "naam": "Paleis Soestdijk",
+    // ...
+  },
+  "links": [
+    {
+      "self": "/collections/gebouwen/items/0308100000022041"
+    }
+  ]
+}
         </code></pre>
       </aside>
       <aside class="example">
         Feature collection
         <pre><code class="json">
-          // GET /collections/gebouwen   HTTP 1.1
-          // Content-type: application/geo+json
-          {
-            "type": "FeatureCollection",
-            "features": [
-              {
-                "type": "Feature",
-                "id": "0308100000022041",
-                "geometry":  {
-                  "type": "Point",
-                  "coordinates": [5.2795,52.1933]
-                },
-                "properties": {
-                  "naam": "Paleis Soestdijk",
-                  ...
-                },
-                "links": [
-                  {
-                    "self": "/collections/gebouwen/0308100000022041"
-                  }
-                ]
-              },
-              {
-              }
-            ],
-            "timeStamp" : "2023-02-22T10:32:23Z",
-            "numberMatched" : "0308100000022041",
-            "numberReturned" : "1",
-            "links": [
-              {
-                "self": "/collections/gebouwen"
-              },
-              {
-                "next": ""
-              }
-            ]
-          }
+// GET /collections/gebouwen   HTTP 1.1
+// Content-type: application/geo+json
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "0308100000022041",
+      "geometry":  {
+        "type": "Point",
+        "coordinates": [5.2795,52.1933]
+      },
+      "properties": {
+        "naam": "Paleis Soestdijk",
+        // ...
+      },
+      "links": [
+        {
+          "self": "/collections/gebouwen/0308100000022041"
+        }
+      ]
+    },
+    {
+    }
+  ],
+  "timeStamp" : "2023-02-22T10:32:23Z",
+  "numberMatched" : "0308100000022041",
+  "numberReturned" : "1",
+  "links": [
+    {
+      "self": "/collections/gebouwen"
+    },
+    {
+      "next": ""
+    }
+  ]
+}
         </code></pre>
       </aside>
       <div class="note">
@@ -404,85 +404,82 @@ In case a collection of resources is returned, the name of the array containing 
       <aside class="example">
         Resource containing geometry
         <pre><code class="json">
-          // GET /gebouwen/0308100000022041   HTTP 1.1
-          // Content-type: application/hal+json
-          {
-            "identificatie": "0308100000022041",
-            "naam": "Paleis Soestdijk",
-            "geometrie":  {
-              "type": "Point",
-              "coordinates": [5.2795,52.1933]
-            },
-            ...,
-            "_links": {
-              {
-                "self": "/gebouwen/0308100000022041"
-              }
-            }
-          }
+// GET /gebouwen/0308100000022041   HTTP 1.1
+// Content-type: application/hal+json
+{
+  "identificatie": "0308100000022041",
+  "naam": "Paleis Soestdijk",
+  "geometrie":  {
+    "type": "Point",
+    "coordinates": [5.2795,52.1933]
+  },
+  "_links": {
+    {
+      "self": "/gebouwen/0308100000022041"
+    }
+  }
+}
         </code></pre>
       </aside>
       <aside class="example">
         Resource containing geometry collection
         <pre><code class="json">
-          // GET /gebouwen/0308100000022041   HTTP 1.1
-          // Content-type: application/hal+json
-          {
-            "identificatie": "0308100000022041",
-            "naam": "Paleis Soestdijk",
-            "geometrie": {
-              "type": "GeometryCollection",
-              "geometries": [
-                {
-                  "type": "Point"
-                  "coordinates": [5.2795,52.1933]
-                },
-                {
-                  "type": "Polygon"
-                  "coordinates" : [...]
-                }
-              ]
-            },
-            ...,
-            "_links": {
-              {
-                "self": "/gebouwen/0308100000022041"
-              }
-            }
-          }
+// GET /gebouwen/0308100000022041   HTTP 1.1
+// Content-type: application/hal+json
+{
+  "identificatie": "0308100000022041",
+  "naam": "Paleis Soestdijk",
+  "geometrie": {
+    "type": "GeometryCollection",
+    "geometries": [
+      {
+        "type": "Point"
+        "coordinates": [5.2795,52.1933]
+      },
+      {
+        "type": "Polygon"
+        "coordinates" : [/* ... */]
+      }
+    ]
+  },
+  "_links": {
+    {
+      "self": "/gebouwen/0308100000022041"
+    }
+  }
+}
         </code></pre>
       </aside>
       <aside class="example">
         Collection of resources containing geometry
         <pre><code class="json">
-          // GET /gebouwen   HTTP 1.1
-          // Content-type: application/hal+json
-          {
-            "gebouwen": [
-              {
-                "identificatie": "0308100000022041",
-                "naam": "Paleis Soestdijk",
-                "geometrie":  {
-                  "type": "Point",
-                  "coordinates": [5.2795,52.1933]
-                }
-                ...
-                "_links": {
-                  {
-                    "self": "/gebouwen/0308100000022041"
-                  }
-                }
-              }
-            ],
-            "_links": {
-              {
-                "self": "/gebouwen"
-              },
-              {
-                "next": ""
-              }
-            }
-          }
+// GET /gebouwen   HTTP 1.1
+// Content-type: application/hal+json
+{
+  "gebouwen": [
+    {
+      "identificatie": "0308100000022041",
+      "naam": "Paleis Soestdijk",
+      "geometrie":  {
+        "type": "Point",
+        "coordinates": [5.2795,52.1933]
+      }
+      "_links": {
+        {
+          "self": "/gebouwen/0308100000022041"
+        }
+      }
+    }
+  ],
+  "_links": {
+    {
+      "self": "/gebouwen"
+    },
+    {
+      "next": ""
+    }
+  }
+}
         </code></pre>
       </aside>
       <p class="note">The resource and resource collection may be [[HAL]] resources and therefore may contain a `_links` object. The `_links` object should contain a self link and in case of a collection also navigation links (e.g. first, next prev, last). In such cases the <code>application/hal+json</code> media type may be used.
