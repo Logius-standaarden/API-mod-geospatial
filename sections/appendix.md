@@ -1,11 +1,12 @@
 # Deprecated rules
-This appendix contains some of the rules that were described in the [first version](https://docs.geostandaarden.nl/api/API-Strategie-ext/#geospatial) of the "Geospatial Extension", which was never officially adopted as a standard. Only those rules that are still relevant in some situations or do not have a good replacement in the current Geospatial model are retained here. They are shown here only as information. 
+
+This appendix contains some of the rules that were described in the [first version](https://docs.geostandaarden.nl/api/API-Strategie-ext/#geospatial) of the "Geospatial Extension", which was never officially adopted as a standard. Only those rules that are still relevant in some situations or do not have a good replacement in the current Geospatial model are retained here. They are shown here only as information.
 
 ## POST endpoint for geospatial queries
 
 <aside class="note">Two rules related to using a POST endpoint for geospatial queries were deprecated because it is expected that a new API Design Rules module "Filtering" will address the issue of using POST for queries. Until then, the old rules may still be of use.
 
-What follows is the original description of the rules in the old Geospatial Extension. 
+What follows is the original description of the rules in the old Geospatial Extension.
 </aside>
 
 A spatial filter can be complex and large. It is best practice to supply complex queries in the body, not in the request URI. Since `GET` may not have a payload (although supported by some clients) use a `POST` request to a separate endpoint. For example, a GEO query to all *panden* where the geometry in the field `_geo` (there may be multiple geometry fields) contains a GeoJSON object (in this case a `Point`, so one coordinate pair):
@@ -48,11 +49,11 @@ The `POST` endpoint is preferably set up as a generic query endpoint to support 
 
 ## Old CRS negotiation method
 
-<aside class="note">An older method of specifying CRS in the headers of requests was part of the first version of the "Geospatial Extension" which was never officially adopted as a standard. APIs that already support this old header method can add support for the current parameter method (see <a href="#crs-negotiation">CRS negotiation</a>) while still supporting the header method for a certain period. Supporting both the new method (using parameters) and the old (using headers) is trivial. 
+<aside class="note">An older method of specifying CRS in the headers of requests was part of the first version of the "Geospatial Extension" which was never officially adopted as a standard. APIs that already support this old header method can add support for the current parameter method (see <a href="#crs-negotiation">CRS negotiation</a>) while still supporting the header method for a certain period. Supporting both the new method (using parameters) and the old (using headers) is trivial.
 
 If a client specifies CRS using a parameter AND in the header, the parameter takes precedence and the CRS in the header is ignored.
 
-What follows is the original description of the rule in the old Geospatial Extension. 
+What follows is the original description of the rule in the old Geospatial Extension.
 </aside>
 
 <span name="api-40"></span>

@@ -1,4 +1,5 @@
 # INSPIRE requirements
+
 [INSPIRE](https://inspire.ec.europa.eu/) is a European directive that forces data providers of geospatial datasets that belong to one of the 34 INSPIRE themes to publish the metadata, a viewservice and a download service. These services can also be APIs.
 
 For the OGC-API Features, an endorsed good practice has been described in a [document](https://github.com/INSPIRE-MIF/gp-ogc-api-features/blob/master/spec/oapif-inspire-download.md) that proposes a technical approach for implementing the requirements set out in the INSPIRE Implementing Rules for Network Services [[IRs for NS](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02009R0976-20141231&from=EN)] based on the newly adopted [OGC API - Features standard](http://docs.opengeospatial.org/is/17-069r3/17-069r3.html).

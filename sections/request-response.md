@@ -1,6 +1,7 @@
 # Request and response
 
-Providing requested resources is the essence of any API. This also applies to REST APIs that handle geospatial data. There are, however, some specific aspects when dealing with geospatial data in REST APIs. The most important aspects are described in this chapter: 
+Providing requested resources is the essence of any API. This also applies to REST APIs that handle geospatial data. There are, however, some specific aspects when dealing with geospatial data in REST APIs. The most important aspects are described in this chapter:
+
 - how to encode geometries in APIs
 - how to supply a spatial filter in the call (request)
 - how to return results of a spatial search
@@ -16,13 +17,13 @@ The Geospatial Module is focused on JSON-based encoding of data. However, consid
 [[rfc7946]] describes the GeoJSON format, including a convention for describing 2D geometric objects in CRS84 (OGC:CRS84). In the Geospatial module of the API strategy we adopt the GeoJSON conventions for describing geometry objects. The convention is extended to allow alternative projections.
 The GeoJSON conventions and extensions described in this module apply to both geometry passed in input parameters and responses.
 
-
 <aside class="note">
-GeoJSON does not cover all use cases. For example, it is not possible to store circular arc geometries or solids in GeoJSON. In such cases, there are several valid options: 
+GeoJSON does not cover all use cases. For example, it is not possible to store circular arc geometries or solids in GeoJSON. In such cases, there are several valid options:
 
-- Use alternative standardized formats for geospatial data, such as [WKT](https://www.w3.org/TR/sdw-bp/#dfn-well-known-text-(wkt)) or its binary equivalent WKB; GML [iso-19136-2007]; or in future [OGC JSON-FG](https://docs.ogc.org/DRAFTS/21-045.html) (currently a draft standard). 
-- When supporting GML, do this according to OGC API Features [Requirements class 8.4](https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_0) for GML Simple Features level 0, or [Requirements class 8.4](https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_2) for GML Simple Features level 2. 
-- Use a workaround, e.g. convert circular lines / arcs to regular linestrings. 
+- Use alternative standardized formats for geospatial data, such as [WKT](https://www.w3.org/TR/sdw-bp/#dfn-well-known-text-(wkt)) or its binary equivalent WKB; GML [iso-19136-2007]; or in future [OGC JSON-FG](https://docs.ogc.org/DRAFTS/21-045.html) (currently a draft standard).
+- When supporting GML, do this according to OGC API Features [Requirements class 8.4](https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_0) for GML Simple Features level 0, or [Requirements class 8.4](https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_2) for GML Simple Features level 2.
+- Use a workaround, e.g. convert circular lines / arcs to regular linestrings.
+
 </aside>
 
 <p>Example of embedding WKT in a JSON object using the following definition for a JSON object:</p>
@@ -71,14 +72,14 @@ A simple spatial filter can be supplied as a bounding box. This is a common way 
 
 <div class="rule" id="/geo/bbox-query-parameter">
   <p class="rulelab"><b>/geo/bbox-query-parameter</b>: Supply a simple spatial filter as a bounding box parameter</p>
-  <p>Support the <a href="https://docs.ogc.org/is/17-069r4/17-069r4.html#_parameter_bbox">OGC API Features part 1 <code>bbox</code> query parameter</a> in conformance to the standard.</p> 
+  <p>Support the <a href="https://docs.ogc.org/is/17-069r4/17-069r4.html#_parameter_bbox">OGC API Features part 1 <code>bbox</code> query parameter</a> in conformance to the standard.</p>
   <pre class="example">
     GET /api/v1/buildings?bbox=5.4,52.1,5.5,53.2</pre>
   <p>Note that if a resource contains multiple geometries, it is up to the provider to decide if geometries of type single geometry or type multiple geometry are returned and that the provider shall clearly document this behavior.
   </p>
   <p> The default spatial operator <code>intersects</code> is used to determine which resources are returned.
   </P>
-  <p> Due to possible performance issue, especially when a combination of filters is used, a provider may decide to limit the size of the bounding box or the number of results. It is also up to the provider to decide if an error is returned in such cases. 
+  <p> Due to possible performance issue, especially when a combination of filters is used, a provider may decide to limit the size of the bounding box or the number of results. It is also up to the provider to decide if an error is returned in such cases.
   The provider shall clearly document this behavior.
   </P>
   <p>
@@ -99,7 +100,7 @@ Spatial operations like <code>intersects</code> and <code>within</code> in combi
 </aside>
 
 <aside class="note">
-Spatial filtering is an extensive topic. There are use cases for geospatial operators like <code>intersects</code> or <code>within</code>. Geospatial filters can be large and complex, which sometimes causes problems since <code>GET</code> may not have a payload (although supported by some clients). 
+Spatial filtering is an extensive topic. There are use cases for geospatial operators like <code>intersects</code> or <code>within</code>. Geospatial filters can be large and complex, which sometimes causes problems since <code>GET</code> may not have a payload (although supported by some clients).
 
 More complex spatial filtering is not addressed in this module. A new API Design Rules module on filtering will address spatial as well as non-spatial filtering. [[ogcapi-features-3]] will provide input for this.
 
@@ -185,7 +186,7 @@ In case a REST API shall comply to the OGC API Features specification for creati
         ...
       }
     }]
-  }  
+  }
   </pre>
   <h4 class="rulelab">How to test</h4>
   <ul>
@@ -268,7 +269,7 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
     "links": [
       {
         "self": "/collections/gebouwen/items/0308100000022041"
-      } 
+      }
     ]
   }</pre>
 
@@ -296,7 +297,7 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
         "links": [
           {
             "self": "/collections/gebouwen/0308100000022041"
-          } 
+          }
         ]
       },
       {
@@ -316,9 +317,10 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
   }</pre>
   <p>
   Note that:
-  
-  - The resources' properties (e.g. <code>naam</code>) are passed in the properties object. Depending on the implemented filter capabilities the properties object may contain all or a selection of the resources' properties.
-  - The OGC API Features specification provides the possibility to add an array of links to a feature and feature collection, which may contain a self link and in case of a feature collection may contain navigation links.
+
+- The resources' properties (e.g. <code>naam</code>) are passed in the properties object. Depending on the implemented filter capabilities the properties object may contain all or a selection of the resources' properties.
+- The OGC API Features specification provides the possibility to add an array of links to a feature and feature collection, which may contain a self link and in case of a feature collection may contain navigation links.
+
   </p>
   <h4 class="rulelab">How to test</h4>
   <p>
@@ -327,8 +329,8 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
   <ul>
     <li>Request a single resource that includes feature content (i.e. coordinates) with response media type <code>application/geo+json</code> in the <code>Accept</code> header.</li>
     <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/geo+json</code></li> 
-    <li>Validate that the returned document is a GeoJSON Feature document.</li> 
+    <li>Validate that <code>Content-Type</code> header contains <code>application/geo+json</code></li>
+    <li>Validate that the returned document is a GeoJSON Feature document.</li>
   </ul>
   <p>
   Test case 2:
@@ -336,8 +338,8 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
   <ul>
     <li>Request a collection of resources that includes feature content (i.e. coordinates) with response media type <code>application/geo+json</code> in the <code>Accept</code> header.</li>
     <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/geo+json</code></li> 
-    <li>Validate that the returned document is a GeoJSON FeatureCollection document.</li> 
+    <li>Validate that <code>Content-Type</code> header contains <code>application/geo+json</code></li>
+    <li>Validate that the returned document is a GeoJSON FeatureCollection document.</li>
   </ul>
   <p>
   Test case 3:
@@ -345,8 +347,8 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
   <ul>
     <li>Request a single resource that does not include feature content (i.e. coordinates) with response media type <code>application/geo+json</code> or <code>application/json</code> in the <code>Accept</code> header.</li>
     <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li> 
-    <li>Validate that the returned document is a JSON document.</li> 
+    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
+    <li>Validate that the returned document is a JSON document.</li>
   </ul>
   <p>
   Test case 4:
@@ -354,9 +356,10 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
   <ul>
     <li>Request a collection of resources that do not include feature content (i.e. coordinates) with response media type <code>application/geo+json</code> or <code>application/json</code> in the <code>Accept</code> header.</li>
     <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li> 
-    <li>Validate that the returned document is a JSON document.</li> 
+    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
+    <li>Validate that the returned document is a JSON document.</li>
   </ul>
+
 </div>
 
 In case a REST API does not have to comply to the OGC API Features specification, e.g. for usage in administrative applications, the REST API shall use the JSON data format. If resources contain geometry, the geometry shall be returned as a GeoJSON <code>Geometry</code> object embedded in the resource. The media type <code>application/json</code>  must be supported. This may also apply to other media types <code>application/\*+json</code>, however this depends on the media type specification. If the media type specification prescribes that resource information must be embedded in a JSON structure defined in the media type specification, then the media type should not be supported while it is impossible to comply to that specification with the method described below. The media type <code>application/geo+json</code> should not be supported while the resource does not comply to the GeoJSON specification, i.e. the response does not return a feature or feature collection.
@@ -456,8 +459,9 @@ In case a collection of resources is returned, the name of the array containing 
   }</pre>
   <p>
   Note that:
-  
-  - The resource and resource collection may be [[HAL]] resources and therefore may contain a `_links` object. The `_links` object should contain a self link and in case of a collection also navigation links (e.g. first, next prev, last). In such cases the <code>application/hal+json</code> media type may be used.
+
+- The resource and resource collection may be [[HAL]] resources and therefore may contain a `_links` object. The `_links` object should contain a self link and in case of a collection also navigation links (e.g. first, next prev, last). In such cases the <code>application/hal+json</code> media type may be used.
+
   </p>
   <h4 class="rulelab">How to test</h4>
   <p>
@@ -466,8 +470,8 @@ In case a collection of resources is returned, the name of the array containing 
   <ul>
     <li>Request a single resource that contains geometry of GeoJSON <code>Geometry</code> object type: <code>Point</code>, <code>MultiPoint</code>, <code>LineString</code>, <code>MultiLineString</code>, <code>Polygon</code> or <code>MultiPolygon</code> and with response media type <code>application/json</code> in the <code>Accept</code> header.</li>
     <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li> 
-    <li>Validate that the returned document is a JSON document.</li> 
+    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
+    <li>Validate that the returned document is a JSON document.</li>
     <li>Validate that the returned document contains a property that complies to one of the GeoJSON <code>Geometry</code> objects mentioned above and contains:
     <ul>
       <li>a property <code>type</code> containing the name of one of the GeoJSON <code>Geometry</code> object types mentioned above, and</li>
@@ -480,8 +484,8 @@ In case a collection of resources is returned, the name of the array containing 
   <ul>
     <li>Request a collection of resources that contain geometry of GeoJSON <code>Geometry</code> object type: <code>Point</code>, <code>MultiPoint</code>, <code>LineString</code>, <code>MultiLineString</code>, <code>Polygon</code> or <code>MultiPolygon</code> and with response media type <code>application/json</code> in the <code>Accept</code> header.</li>
     <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li> 
-    <li>Validate that the returned document is a JSON document.</li> 
+    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
+    <li>Validate that the returned document is a JSON document.</li>
     <li>Validate that the returned document contains an array of resources and that each resource contains a property that complies to one of the GeoJSON <code>Geometry</code> objects mentioned above and contains:
     <ul>
       <li>a property <code>type</code> containing the name of one of the GeoJSON <code>Geometry</code> object types mentioned above, and</li>
@@ -494,9 +498,9 @@ In case a collection of resources is returned, the name of the array containing 
   <ul>
     <li>Request a single resource that contains geometry of GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code> and with response media type <code>application/json</code> in the <code>Accept</code> header.</li>
     <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li> 
-    <li>Validate that the returned document is a JSON document.</li> 
-    <li>Validate that the returned document contains a property that complies to the GeoJSON <code>Geometry</code> object mentioned above and contains: 
+    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
+    <li>Validate that the returned document is a JSON document.</li>
+    <li>Validate that the returned document contains a property that complies to the GeoJSON <code>Geometry</code> object mentioned above and contains:
     <ul>
       <li>a property <code>type</code> containing the name of the GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code>, and</li>
       <li>a property <code>geometries</code> containing an array of GeoJSON <code>Geometry</code> objects.</li>
@@ -508,12 +512,14 @@ In case a collection of resources is returned, the name of the array containing 
   <ul>
     <li>Request a collection of resources that contain geometry of GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code> and with response media type <code>application/json</code> in the <code>Accept</code> header.</li>
     <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li> 
-    <li>Validate that the returned document is a JSON document.</li> 
-    <li>Validate that the returned document contains an array of resources and that each resource contains a  property that complies to the GeoJSON <code>Geometry</code> object mentioned above and contains: 
-    <ul>
-      <li>a property <code>type</code> containing the name of the GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code>, and</li>
-      <li>a property <code>geometries</code> containing an array of GeoJSON <code>Geometry</code> objects.</li>
-    </ul></li>
+    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
+    <li>Validate that the returned document is a JSON document.</li>
+    <li>Validate that the returned document contains an array of resources and that each resource contains a  property that complies to the GeoJSON <code>Geometry</code> object mentioned above and contains:
+      <ul>
+        <li>a property <code>type</code> containing the name of the GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code>, and</li>
+        <li>a property <code>geometries</code> containing an array of GeoJSON <code>Geometry</code> objects.</li>
+      </ul>
+    </li>
   </ul>
+
 </div>

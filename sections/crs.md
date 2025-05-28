@@ -27,7 +27,7 @@ A client shall be able to determine a list of CRSs supported by an API.
     <li>Validate that the <code>crs</code> property contains an array with CRS references in the form of URIs.</li>
     <li>Validate that the CRS URIs return a GML document with an <code>epsg:CommonMetadata</code> element (<code>xmlns:epsg="urn:x-ogp:spec:schema-xsd:EPSG:1.0:dataset</code>).</li>
   </ul>
-  
+
   <p>If a REST API does not have to comply to the OGC API Features specification, e.g. when the API is used for administrative purposes, then the API shall also provide an endpoint to determine the supported CRSs.</p>
   <pre class="example">
   // GET /api/v1/crss:</pre>
@@ -51,11 +51,11 @@ If a feature collection supports additional CRSs compared to the global CRS list
 
 If a feature collection supports a different set of CRSs than the set defined in the global CRS list, then a reference to the global CRS list is omitted and only the URIs of the supported CRSs are added to the CRS list in the `crs` property of the feature collection.
 
-For clients, it may be helpful to know the CRS identifier that may be used to retrieve features from that collection without the need to apply a CRS transformation. If all features in a feature collection are stored using a particular CRS, the property `storageCRS` shall be used to specify this CRS, in accordance with [OGC API Features - part 2 - 6.2.2 Storage CRS](https://docs.ogc.org/is/18-058/18-058.html#_storage_crs). The value of this property shall be one of the CRSs supported by the API and advertised in the CRS list as stated in requirement 4 of [OGC API Features - part 2 - 6.2.2 Storage CRS](https://docs.ogc.org/is/18-058/18-058.html#_storage_crs). If relevant, the epoch should also be specified, using the `storageCRSCoordinateEpoch` property. For an explanation of the use of epochs with CRS, see the CRS Guidelines [[hr-crs]]. 
+For clients, it may be helpful to know the CRS identifier that may be used to retrieve features from that collection without the need to apply a CRS transformation. If all features in a feature collection are stored using a particular CRS, the property `storageCRS` shall be used to specify this CRS, in accordance with [OGC API Features - part 2 - 6.2.2 Storage CRS](https://docs.ogc.org/is/18-058/18-058.html#_storage_crs). The value of this property shall be one of the CRSs supported by the API and advertised in the CRS list as stated in requirement 4 of [OGC API Features - part 2 - 6.2.2 Storage CRS](https://docs.ogc.org/is/18-058/18-058.html#_storage_crs). If relevant, the epoch should also be specified, using the `storageCRSCoordinateEpoch` property. For an explanation of the use of epochs with CRS, see the CRS Guidelines [[hr-crs]].
 
 <div class="rule" id="/geo/storage-crs">
   <p class="rulelab"><b>/geo/storage-crs</b>: Make known in which CRS the geospatial data is stored by specifying the property <code>storageCrs</code> in the collection object. </p>
-  <p>The value of this property shall be one of the CRSs the API supports.</p> 
+  <p>The value of this property shall be one of the CRSs the API supports.</p>
   <h4 class="rulelab">How to test</h4>
   <ul>
     <li>Issue an HTTP GET request to each collection in the <code>/collections</code> endpoint of the API.</li>
@@ -74,7 +74,7 @@ When referring to a coordinate reference system using its code in the rest of th
 
 Since most client-side mapping libraries use WGS 84 longitude-latitude (CRS84), the W3C/OGC [Spatial Data on the Web](https://www.w3.org/2021/sdw/) working group recommends to use this as the default coordinate reference system. The API strategy caters for this supporting not only ETRS89 and RD, but also CRS84.
 
-The *default* CRS, i.e. the CRS which is assumed when not specified by either the API or the client, is CRS84, in line with GeoJSON and OGC API Features. 
+The *default* CRS, i.e. the CRS which is assumed when not specified by either the API or the client, is CRS84, in line with GeoJSON and OGC API Features.
 
 <div class="rule" id="/geo/default-crs">
   <p class="rulelab"><b>/geo/default-crs</b>: Use <a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84">CRS84</a> as the default coordinate reference system (CRS). Support CRS84 in line with OGC API Features <a href="http://docs.ogc.org/is/17-069r3/17-069r3.html#_coordinate_reference_systems">Requirement 10</a>. </p>
@@ -87,7 +87,7 @@ The *default* CRS, i.e. the CRS which is assumed when not specified by either th
   </ul>
 </div>
 
-In addition, support for ETRS89 and/or RD is required. 
+In addition, support for ETRS89 and/or RD is required.
 
 <span name="api-39"></span>
 <div class="rule" id="/geo/preferred-crs">
@@ -98,7 +98,7 @@ In addition, support for ETRS89 and/or RD is required.
     <li>Issue an HTTP GET request to retrieve some spatial data from the API, specifying ETRS89 and/or RD as coordinate reference system.</li>
     <li>Validate that the response includes a <code>Content-Crs</code> header with the URI for the requested CRS.</li>
     <li>Validate the retrieved spatial data using the coordinate reference system used in the request.</li>
-  </ul>  
+  </ul>
 </div>
 
 The guiding principles for CRS support:
@@ -196,7 +196,7 @@ In an API that supports the creation and/or updating of items, POST, PUT or PATC
   </ul>
 </div>
 
-The API should be able to handle the following scenarios based on the rules stated above: 
+The API should be able to handle the following scenarios based on the rules stated above:
 
 | Scenario                                        | Explanation |
 | ----------------------------------------------- | ----------- |
@@ -211,19 +211,19 @@ Below is a list of the most commonly used CRSs in the Netherlands:
 
 | Name | Code | Type | Dimension | Scope | URI |
 |-|-|-|-|-|-|
-| Amersfoort / RD New | 28992 | easting, northing (x, y) | 2D | Dutch | http://www.opengis.net/def/crs/EPSG/9.9.1/28992 |
-| Amersfoort / RD New + NAP height | 7415 | easting, northing, height (x, y, h) | 3D | Dutch | http://www.opengis.net/def/crs/EPSG/9.9.1/7415 |
-| ETRS89 | 4258 | latitude, longitude (&#966;, &#955;) |2D | European | http://www.opengis.net/def/crs/EPSG/9.9.1/4258 |
-| ETRS89 | 4937 | latitude, longitude, height (&#966;, &#955;, h) | 3D | European | http://www.opengis.net/def/crs/EPSG/9.9.1/4937 |
-| ETRF2000 | 7931 | latitude, longitude, height (&#966;, &#955;, h) | 3D | European | http://www.opengis.net/def/crs/EPSG/9.9.1/7931 |
-| ETRF2000 | 9067 | latitude, longitude (&#966;, &#955;) | 2D | European | http://www.opengis.net/def/crs/EPSG/9.9.1/9067 |
-| ITRF2014 | 7912 | latitude, longitude, height (&#966;, &#955;, h) | 3D | Global | http://www.opengis.net/def/crs/EPSG/9.9.1/7912 |
-| ITRF2014 | 9000 | latitude, longitude (&#966;, &#955;) | 2D | Global | http://www.opengis.net/def/crs/EPSG/9.9.1/9000 |
-| WGS 84 longitude-latitude | CRS84 | longitude, latitude (&#955;, &#966;) | 2D | Global | http://www.opengis.net/def/crs/OGC/1.3/CRS84 |
-| WGS 84 longitude-latitude-height | CRS84h | longitude, latitude, height (&#955;, &#966;, h) | 3D | Global | http://www.opengis.net/def/crs/OGC/0/CRS84h |
-| WGS 84 / Pseudo-Mercator | 3857 | easting, northing (x, y) | 2D | Global | http://www.opengis.net/def/crs/EPSG/9.9.1/3857 |
+| Amersfoort / RD New | 28992 | easting, northing (x, y) | 2D | Dutch | <https://www.opengis.net/def/crs/EPSG/9.9.1/28992> |
+| Amersfoort / RD New + NAP height | 7415 | easting, northing, height (x, y, h) | 3D | Dutch | <https://www.opengis.net/def/crs/EPSG/9.9.1/7415> |
+| ETRS89 | 4258 | latitude, longitude (&#966;, &#955;) |2D | European | <https://www.opengis.net/def/crs/EPSG/9.9.1/4258> |
+| ETRS89 | 4937 | latitude, longitude, height (&#966;, &#955;, h) | 3D | European | <https://www.opengis.net/def/crs/EPSG/9.9.1/4937> |
+| ETRF2000 | 7931 | latitude, longitude, height (&#966;, &#955;, h) | 3D | European | <https://www.opengis.net/def/crs/EPSG/9.9.1/7931> |
+| ETRF2000 | 9067 | latitude, longitude (&#966;, &#955;) | 2D | European | <https://www.opengis.net/def/crs/EPSG/9.9.1/9067> |
+| ITRF2014 | 7912 | latitude, longitude, height (&#966;, &#955;, h) | 3D | Global | <https://www.opengis.net/def/crs/EPSG/9.9.1/7912> |
+| ITRF2014 | 9000 | latitude, longitude (&#966;, &#955;) | 2D | Global | <https://www.opengis.net/def/crs/EPSG/9.9.1/9000> |
+| WGS 84 longitude-latitude | CRS84 | longitude, latitude (&#955;, &#966;) | 2D | Global | <https://www.opengis.net/def/crs/OGC/1.3/CRS84> |
+| WGS 84 longitude-latitude-height | CRS84h | longitude, latitude, height (&#955;, &#966;, h) | 3D | Global | <https://www.opengis.net/def/crs/OGC/0/CRS84h> |
+| WGS 84 / Pseudo-Mercator | 3857 | easting, northing (x, y) | 2D | Global | <https://www.opengis.net/def/crs/EPSG/9.9.1/3857> |
 
-For a more extensive overview of CRSs see: https://docs.geostandaarden.nl/crs/crs/#bijlage-a-crs-overzicht-tabel.
+For a more extensive overview of CRSs see: <https://docs.geostandaarden.nl/crs/crs/#bijlage-a-crs-overzicht-tabel>.
 Note that the URI of each CRS contains a version number and that new versions may be released in future.
 Before using a URI verify if newer versions are available and use the latest version.
 
@@ -234,7 +234,7 @@ New ensemble member CRSs may be released in future (e.g. ITRF2020 has been relea
 <aside class="note">
 Officially, WGS 84 longitude-latitude (OGC:CRS84) is the only CRS allowed in GeoJSON. However, GeoJSON does state that using another CRS is allowed, if this is agreed between provider and consumer of the data. The API functionality described above, to negotiate the CRS between client and server, can be viewed as such an agreement. Many GIS clients can deal with GeoJSON in other CRS than CRS84 (OGC:CRS84).
 
-In addition, the Geonovum CRS guidelines [[hr-crs]] describe [how ETRS89 can be treated as equal to CRS84 (OGC:CRS84)under certain circumstances](https://docs.geostandaarden.nl/crs/crs/#wgs-84-gelijkstellen-aan-etrs89-nultransformatie). 
+In addition, the Geonovum CRS guidelines [[hr-crs]] describe [how ETRS89 can be treated as equal to CRS84 (OGC:CRS84)under certain circumstances](https://docs.geostandaarden.nl/crs/crs/#wgs-84-gelijkstellen-aan-etrs89-nultransformatie).
 
 [[JSON-FG]] is a proposed standard extension of GeoJSON that adds CRS support.
 </aside>
