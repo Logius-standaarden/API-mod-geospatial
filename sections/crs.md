@@ -17,41 +17,55 @@ A client shall be able to determine a list of CRSs supported by an API.
 
 <div class="rule" id="/geo/crs-list">
   <p class="rulelab"><b>/geo/crs-list</b>: Provide a list of all CRSs that are supported by the API</p>
-  <p>If a REST API shall comply to the OGC API Features specification then the API must provide an endpoint to determine a list of supported CRSs.</p>
-  <pre class="example">
-  // GET /api/v1/collections:</pre>
-  <h4 class="rulelab">How to test</h4>
-  <ul>
-    <li>Issue an HTTP GET request to the <code>/collections</code> endpoint of the API.</li>
-    <li>Validate that the returned document contains a <code>collections</code> object with the <code>crs</code> property.</li>
-    <li>Validate that the <code>crs</code> property contains an array with CRS references in the form of URIs.</li>
-    <li>Validate that the CRS URIs return a GML document with an <code>epsg:CommonMetadata</code> element (<code>xmlns:epsg="urn:x-ogp:spec:schema-xsd:EPSG:1.0:dataset</code>).</li>
-  </ul>
+  <dl>
+    <dt>Statement</dt>
+    <dd>
+      <p>If a REST API shall comply to the OGC API Features specification then the API must provide an endpoint to determine a list of supported CRSs.</p>
+      <div class="example">
+        <pre>// GET /api/v1/collections:</pre>
+      </div>
+      <p>If a REST API does not have to comply to the OGC API Features specification, e.g. when the API is used for administrative purposes, then the API shall also provide an endpoint to determine the supported CRSs.</p>
+      <div class="example">
+        <pre>// GET /api/v1/crss:</pre>
+      </div>
+    </dd>
+    <dt>Rationale</dt>
+    <dd>
+      
+      According to [OGC API Features - part 1 - 7.13. Feature collections](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_) an OGC API Features API shall provide a GET operation on the `/collections` endpoint which returns a collections object.
+      
+      OGC API Features - part 2 - Coordinate Reference Systems by Reference [[ogcapi-features-2]] describes how to support different CRSs in your geospatial API. According to [OGC API Features - part 2 - 6.2 Discovery](https://docs.ogc.org/is/18-058/18-058.html#crs-discovery) and in particular [Global list of CRS identifiers](https://docs.ogc.org/is/18-058/18-058.html#_global_list_of_crs_identifiers), a collections object provided by the API's `/collections` endpoint may contain a global list of supported CRSs by means of the `crs` property. This global CRS list applies to all feature collections delivered by the API, unless otherwise stated at a feature collection.
+      
+      Each feature collection mentioned within the `collections` list may also contain a `crs` property if the set of supported CRSs differs from the global CRS list.
+      If a feature collection supports exactly the same CRSs as mentioned in the global CRS list, then the `crs` property may be omitted.
+      
+      If a feature collection supports additional CRSs compared to the global CRS list in the collections object, then a reference to the global CRS list `#/crs` may be added in the feature collection object and the URIs of the additional CRSs are added to the CRS list in the `crs` property of the feature collection.
+      
+      If a feature collection supports a different set of CRSs than the set defined in the global CRS list, then a reference to the global CRS list is omitted and only the URIs of the supported CRSs are added to the CRS list in the `crs` property of the feature collection.
+      
+      For clients, it may be helpful to know the CRS identifier that may be used to retrieve features from that collection without the need to apply a CRS transformation. If all features in a feature collection are stored using a particular CRS, the property `storageCRS` shall be used to specify this CRS, in accordance with [OGC API Features - part 2 - 6.2.2 Storage CRS](https://docs.ogc.org/is/18-058/18-058.html#_storage_crs). The value of this property shall be one of the CRSs supported by the API and advertised in the CRS list as stated in requirement 4 of [OGC API Features - part 2 - 6.2.2 Storage CRS](https://docs.ogc.org/is/18-058/18-058.html#_storage_crs). If relevant, the epoch should also be specified, using the `storageCRSCoordinateEpoch` property. For an explanation of the use of epochs with CRS, see the CRS Guidelines [[hr-crs]].
 
-  <p>If a REST API does not have to comply to the OGC API Features specification, e.g. when the API is used for administrative purposes, then the API shall also provide an endpoint to determine the supported CRSs.</p>
-  <pre class="example">
-  // GET /api/v1/crss:</pre>
-  <h4 class="rulelab">How to test</h4>
-  <ul>
-    <li>Issue an HTTP GET request to the <code>/crss</code> endpoint of the API.</li>
-    <li>Validate that the returned document contains an object with a <code>crs</code> property.</li>
-    <li>Validate that the <code>crs</code> property contains an array with CRS references in the form of URIs.</li>
-    <li>Validate that the CRS URIs return a GML document with an <code>epsg:CommonMetadata</code> element (<code>xmlns:epsg="urn:x-ogp:spec:schema-xsd:EPSG:1.0:dataset</code>).</li>
-  </ul>
+    </dd>
+    <dt>How to test</dt>
+    <dd>
+      <p>If the REST API shall comply to the OGC API Features specification:</p>
+      <ul>
+        <li>Issue an HTTP GET request to the <code>/collections</code> endpoint of the API.</li>
+        <li>Validate that the returned document contains a <code>collections</code> object with the <code>crs</code> property.</li>
+      </ul>
+      <p>If the REST API does not have to comply to the OGC API Features specification:</p>
+      <ul>
+        <li>Issue an HTTP GET request to the <code>/crss</code> endpoint of the API.</li>
+        <li>Validate that the returned document contains an object with a <code>crs</code> property.</li>
+      </ul>
+      <p>In both cases, verify the following based on the response:</p>
+      <ul>
+        <li>Validate that the <code>crs</code> property contains an array with CRS references in the form of URIs.</li>
+        <li>Validate that the CRS URIs return a GML document with an <code>epsg:CommonMetadata</code> element (<code>xmlns:epsg="urn:x-ogp:spec:schema-xsd:EPSG:1.0:dataset</code>).</li>
+      </ul>
+    </dd>
+  </dl>
 </div>
-
-According to [OGC API Features - part 1 - 7.13. Feature collections](https://docs.opengeospatial.org/is/17-069r3/17-069r3.html#_collections_) an OGC API Features API shall provide a GET operation on the `/collections` endpoint which returns a collections object.
-
-OGC API Features - part 2 - Coordinate Reference Systems by Reference [[ogcapi-features-2]] describes how to support different CRSs in your geospatial API. According to [OGC API Features - part 2 - 6.2 Discovery](https://docs.ogc.org/is/18-058/18-058.html#crs-discovery) and in particular [Global list of CRS identifiers](https://docs.ogc.org/is/18-058/18-058.html#_global_list_of_crs_identifiers), a collections object provided by the API's `/collections` endpoint may contain a global list of supported CRSs by means of the `crs` property. This global CRS list applies to all feature collections delivered by the API, unless otherwise stated at a feature collection.
-
-Each feature collection mentioned within the `collections` list may also contain a `crs` property if the set of supported CRSs differs from the global CRS list.
-If a feature collection supports exactly the same CRSs as mentioned in the global CRS list, then the `crs` property may be omitted.
-
-If a feature collection supports additional CRSs compared to the global CRS list in the collections object, then a reference to the global CRS list `#/crs` may be added in the feature collection object and the URIs of the additional CRSs are added to the CRS list in the `crs` property of the feature collection.
-
-If a feature collection supports a different set of CRSs than the set defined in the global CRS list, then a reference to the global CRS list is omitted and only the URIs of the supported CRSs are added to the CRS list in the `crs` property of the feature collection.
-
-For clients, it may be helpful to know the CRS identifier that may be used to retrieve features from that collection without the need to apply a CRS transformation. If all features in a feature collection are stored using a particular CRS, the property `storageCRS` shall be used to specify this CRS, in accordance with [OGC API Features - part 2 - 6.2.2 Storage CRS](https://docs.ogc.org/is/18-058/18-058.html#_storage_crs). The value of this property shall be one of the CRSs supported by the API and advertised in the CRS list as stated in requirement 4 of [OGC API Features - part 2 - 6.2.2 Storage CRS](https://docs.ogc.org/is/18-058/18-058.html#_storage_crs). If relevant, the epoch should also be specified, using the `storageCRSCoordinateEpoch` property. For an explanation of the use of epochs with CRS, see the CRS Guidelines [[hr-crs]].
 
 <div class="rule" id="/geo/storage-crs">
   <p class="rulelab"><b>/geo/storage-crs</b>: Make known in which CRS the geospatial data is stored by specifying the property <code>storageCrs</code> in the collection object. </p>
