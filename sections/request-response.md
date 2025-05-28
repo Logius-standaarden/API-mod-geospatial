@@ -76,9 +76,9 @@ A simple spatial filter can be supplied as a bounding box. This is a common way 
     <dt>Statement</dt>
     <dd>
       Support the <a href="https://docs.ogc.org/is/17-069r4/17-069r4.html#_parameter_bbox">OGC API Features part 1 <code>bbox</code> query parameter</a> in conformance to the standard.</p>
-      <div class="example">
+      <aside class="example">
         <code>GET /api/v1/buildings?bbox=5.4,52.1,5.5,53.2</code>
-      </div>
+      </aside>
       <div class="note">Note that if a resource contains multiple geometries, it is up to the provider to decide if geometries of type single geometry or type multiple geometry are returned and that the provider shall clearly document this behavior.</div>
     </dd>
     <dt>Rationale</dt>
@@ -118,7 +118,7 @@ However, until the filtering module is written, the geospatial module retains ru
     <dt>Statement</dt>
     <dd>
       In case of a global query <code>/api/v1/_search</code>, results should be placed in the relevant geometric context, because results from different <a href="https://gitdocumentatie.logius.nl/publicatie/api/adr/2.0.2/#resources">collections</a>, i.e. different sets of resources of the same type, are retrieved. Express the name of the collection to which the results belong in the singular form using the property <code>type</code>. For example:
-      <div class="example">
+      <aside class="example">
         <pre><code class="json">
           // POST /api/v1/_search:
           {
@@ -147,7 +147,7 @@ However, until the filtering module is written, the geospatial module retains ru
             }
           }
         </code></pre>
-      </div>
+      </aside>
     </dd>
     <dt>How to test</dt>
     <dd>
@@ -168,7 +168,7 @@ In case a REST API shall comply to the OGC API Features specification for creati
     <dt>Statement</dt>
     <dd>
       For representing geometric information in an API, use the convention for describing geometry as defined in the GeoJSON format [[rfc7946]]. Support GeoJSON as described in <a href="https://docs.ogc.org/DRAFTS/20-002r1.html">OGC API Features part 4</a>, but note that this standard is still in development.
-      <div class="example">
+      <aside class="example">
         POST feature
         <pre><code class="json">
           // POST /collections/gebouwen/items   HTTP/1.1
@@ -185,8 +185,8 @@ In case a REST API shall comply to the OGC API Features specification for creati
             }
           }
         </code></pre>
-      </div>
-      <div class="example">
+      </aside>
+      <aside class="example">
         POST feature collection
         <pre><code class="json">
           // POST /collections   HTTP/1.1
@@ -207,7 +207,7 @@ In case a REST API shall comply to the OGC API Features specification for creati
             }]
           }
         </code></pre>
-      </div>
+      </aside>
     </dd>
     <dt>How to test</dt>
     <dd>
@@ -230,7 +230,7 @@ In case a collection of resources is embedded in the request resource, the name 
     <dt>Statement</dt>
     <dd>
       When a JSON (<code>application/json</code>) request contains a geometry, represent it in the same way as the <code>Geometry</code> object of GeoJSON.
-      <div class="example">
+      <aside class="example">
         POST resource containing geometry
         <pre><code class="json">
           // POST /collections/gebouwen/items   HTTP/1.1
@@ -243,8 +243,8 @@ In case a collection of resources is embedded in the request resource, the name 
             }
           }
         </code></pre>
-      </div>
-      <div class="example">
+      </aside>
+      <aside class="example">
         POST resource containing geometry collection
         <pre><code class="json">
           // POST /collections/gebouwen/items   HTTP/1.1
@@ -262,7 +262,7 @@ In case a collection of resources is embedded in the request resource, the name 
             }
           }
         </code></pre>
-      </div>
+      </aside>
     </dd>
     <dt>How to test</dt>
     <dd>
@@ -285,7 +285,7 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
     <dt>Statement</dt>
     <dd>
       For representing 2D geometric information in an API response, use the convention for describing geometry as defined in the GeoJSON format [[rfc7946]]. Support GeoJSON as described in OGC API Features <a href="https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geojson">Requirements class 8.3</a> [[ogcapi-features-1]].
-      <div class="example">
+      <aside class="example">
         Feature
         <pre><code class="json">
           // GET /collections/gebouwen/items/0308100000022041   HTTP 1.1
@@ -308,8 +308,8 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
             ]
           }
         </code></pre>
-      </div>
-      <div class="example">
+      </aside>
+      <aside class="example">
         Feature collection
         <pre><code class="json">
           // GET /collections/gebouwen   HTTP 1.1
@@ -350,7 +350,7 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
             ]
           }
         </code></pre>
-      </div>
+      </aside>
       <div class="note">
         <li>The resources' properties (e.g. <code>naam</code>) are passed in the properties object. Depending on the implemented filter capabilities the properties object may contain all or a selection of the resources' properties.</li>
         <li>The OGC API Features specification provides the possibility to add an array of links to a feature and feature collection, which may contain a self link and in case of a feature collection may contain navigation links</li>
@@ -401,7 +401,7 @@ In case a collection of resources is returned, the name of the array containing 
     <dt>Statement</dt>
     <dd>
       When a JSON (<code>application/json</code>) response contains a geometry, represent it in the same way as the <code>Geometry</code> object of GeoJSON.
-      <div class="example">
+      <aside class="example">
         Resource containing geometry
         <pre><code class="json">
           // GET /gebouwen/0308100000022041   HTTP 1.1
@@ -421,8 +421,8 @@ In case a collection of resources is returned, the name of the array containing 
             }
           }
         </code></pre>
-      </div>
-      <div class="example">
+      </aside>
+      <aside class="example">
         Resource containing geometry collection
         <pre><code class="json">
           // GET /gebouwen/0308100000022041   HTTP 1.1
@@ -451,8 +451,8 @@ In case a collection of resources is returned, the name of the array containing 
             }
           }
         </code></pre>
-      </div>
-      <div class="example">
+      </aside>
+      <aside class="example">
         Collection of resources containing geometry
         <pre><code class="json">
           // GET /gebouwen   HTTP 1.1
@@ -484,7 +484,7 @@ In case a collection of resources is returned, the name of the array containing 
             }
           }
         </code></pre>
-      </div>
+      </aside>
       <p class="note">The resource and resource collection may be [[HAL]] resources and therefore may contain a `_links` object. The `_links` object should contain a self link and in case of a collection also navigation links (e.g. first, next prev, last). In such cases the <code>application/hal+json</code> media type may be used.
     </dd>
     <dt>How to test</dt>

@@ -21,13 +21,13 @@ A client shall be able to determine a list of CRSs supported by an API.
     <dt>Statement</dt>
     <dd>
       <p>If a REST API shall comply to the OGC API Features specification then the API must provide an endpoint to determine a list of supported CRSs.</p>
-      <div class="example">
+      <aside class="example">
         <code>GET /api/v1/collections</code>
-      </div>
+      </aside>
       <p>If a REST API does not have to comply to the OGC API Features specification, e.g. when the API is used for administrative purposes, then the API shall also provide an endpoint to determine the supported CRSs.</p>
-      <div class="example">
+      <aside class="example">
         <code>GET /api/v1/crss</code>
-      </div>
+      </aside>
     </dd>
     <dt>Rationale</dt>
     <dd>
