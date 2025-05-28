@@ -72,27 +72,31 @@ A simple spatial filter can be supplied as a bounding box. This is a common way 
 
 <div class="rule" id="/geo/bbox-query-parameter">
   <p class="rulelab"><b>/geo/bbox-query-parameter</b>: Supply a simple spatial filter as a bounding box parameter</p>
-  <p>Support the <a href="https://docs.ogc.org/is/17-069r4/17-069r4.html#_parameter_bbox">OGC API Features part 1 <code>bbox</code> query parameter</a> in conformance to the standard.</p>
-  <pre class="example">
-    GET /api/v1/buildings?bbox=5.4,52.1,5.5,53.2</pre>
-  <p>Note that if a resource contains multiple geometries, it is up to the provider to decide if geometries of type single geometry or type multiple geometry are returned and that the provider shall clearly document this behavior.
-  </p>
-  <p> The default spatial operator <code>intersects</code> is used to determine which resources are returned.
-  </P>
-  <p> Due to possible performance issue, especially when a combination of filters is used, a provider may decide to limit the size of the bounding box or the number of results. It is also up to the provider to decide if an error is returned in such cases.
-  The provider shall clearly document this behavior.
-  </P>
-  <p>
-  The provider shall be able to provide resources that do not have a geometry property and are related to resources that match the bounding box filter.
-  </p>
-  <p> An error shall be given if the provided coordinates are outside the specified coordinate reference system.
-  </p>
-  <h4 class="rulelab">How to test</h4>
-  <ul>
-    <li>Issue an HTTP GET request to the API, including the <code>bbox</code> query parameter and using <a href="#crs-negotiation">CRS Negotiation</a>.</li>
-    <li>Validate that a response with status code 200 is returned.</li>
-    <li>Verify that only features that have a spatial geometry that intersects the bounding box are returned as part of the result set.</li>
-  </ul>
+  <dl>
+    <dt>Statement</dt>
+    <dd>
+      Support the <a href="https://docs.ogc.org/is/17-069r4/17-069r4.html#_parameter_bbox">OGC API Features part 1 <code>bbox</code> query parameter</a> in conformance to the standard.</p>
+      <div class="example">
+        <code>GET /api/v1/buildings?bbox=5.4,52.1,5.5,53.2</code>
+      </div>
+      <div class="note">Note that if a resource contains multiple geometries, it is up to the provider to decide if geometries of type single geometry or type multiple geometry are returned and that the provider shall clearly document this behavior.</div>
+    </dd>
+    <dt>Rationale</dt>
+    <dd>
+      <p>The default spatial operator <code>intersects</code> is used to determine which resources are returned.
+      <p>Due to possible performance issue, especially when a combination of filters is used, a provider may decide to limit the size of the bounding box or the number of results. It is also up to the provider to decide if an error is returned in such cases. The provider shall clearly document this behavior.
+      <p>The provider shall be able to provide resources that do not have a geometry property and are related to resources that match the bounding box filter.
+      <p>An error shall be given if the provided coordinates are outside the specified coordinate reference system.
+    </dd>
+    <dt>How to test</dt>
+    <dd>
+      <ol>
+        <li>Issue an HTTP GET request to the API, including the <code>bbox</code> query parameter and using <a href="#crs-negotiation">CRS Negotiation</a>.</li>
+        <li>Validate that a response with status code 200 is returned.</li>
+        <li>Verify that only features that have a spatial geometry that intersects the bounding box are returned as part of the result set.</li>
+      </ol>
+    </dd>
+  </dl>
 </div>
 
 <aside class="note">
@@ -110,40 +114,49 @@ However, until the filtering module is written, the geospatial module retains ru
 <span name="api-38"></span>
 <div class="rule" id="/geo/geometric-context">
   <p class="rulelab"><b>/geo/geometric-context</b>: Place results of a global spatial query in the relevant geometric context</p>
-  <p>In case of a global query <code>/api/v1/_search</code>, results should be placed in the relevant geometric context, because results from different <a href="https://gitdocumentatie.logius.nl/publicatie/api/adr/2.0.2/#resources">collections</a>, i.e. different sets of resources of the same type, are retrieved. Express the name of the collection to which the results belong in the singular form using the property <code>type</code>. For example:</p>
-  <pre class="example">
-  // POST /api/v1/_search:
-  {
-    "currentPage": 1,
-    "nextPage": 2,
-    "pageSize": 10,
-    "_embedded": {
-      "items": [
-        {
-          "type": "enkelbestemming",
-          "_links": {
-            "self": {
-              "href": "https://api.example.org/v1/enkelbestemmingen/1234"
+  <dl>
+    <dt>Statement</dt>
+    <dd>
+      In case of a global query <code>/api/v1/_search</code>, results should be placed in the relevant geometric context, because results from different <a href="https://gitdocumentatie.logius.nl/publicatie/api/adr/2.0.2/#resources">collections</a>, i.e. different sets of resources of the same type, are retrieved. Express the name of the collection to which the results belong in the singular form using the property <code>type</code>. For example:
+      <div class="example">
+        <pre><code class="json">
+          // POST /api/v1/_search:
+          {
+            "currentPage": 1,
+            "nextPage": 2,
+            "pageSize": 10,
+            "_embedded": {
+              "items": [
+                {
+                  "type": "enkelbestemming",
+                  "_links": {
+                    "self": {
+                      "href": "https://api.example.org/v1/enkelbestemmingen/1234"
+                    }
+                  }
+                },
+                {
+                  "type": "dubbelbestemming",
+                  "_links": {
+                    "self": {
+                      "href": "https://api.example.org/v1/dubbelbestemmingen/8765"
+                    }
+                  }
+                }
+              ]
             }
           }
-        },
-        {
-          "type": "dubbelbestemming",
-          "_links": {
-            "self": {
-              "href": "https://api.example.org/v1/dubbelbestemmingen/8765"
-            }
-          }
-        }
-      ]
-    }
-  }
-  </pre>
-  <h4 class="rulelab">How to test</h4>
-  <ul>
-    <li>Issue an HTTP GET request to the API.</li>
-    <li>Validate that the returned document contains the expected <code>type</code> property for each member.</li>
-  </ul>
+        </code></pre>
+      </div>
+    </dd>
+    <dt>How to test</dt>
+    <dd>
+      <ol>
+        <li>Issue an HTTP GET request to the API.</li>
+        <li>Validate that the returned document contains the expected <code>type</code> property for each member.</li>
+      </ol>
+    </dd>
+  </dl>
 </div>
 
 In case a REST API shall comply to the OGC API Features specification for creating, updating and deleting a resource, the following applies.
@@ -151,49 +164,60 @@ In case a REST API shall comply to the OGC API Features specification for creati
 <span name="api-34"></span>
 <div class="rule" id="/geo/geojson-request">
   <p class="rulelab"><b>/geo/geojson-request</b>: Support GeoJSON in geospatial API requests</p>
-  <p>For representing geometric information in an API, use the convention for describing geometry as defined in the GeoJSON format [[rfc7946]]. Support GeoJSON as described in <a href="https://docs.ogc.org/DRAFTS/20-002r1.html">OGC API Features part 4</a>, but note that this standard is still in development.</p>
-  Example: POST feature
-  <pre class="example">
-  // POST /collections/gebouwen/items   HTTP/1.1
-  // Content-Type: application/geo+json
-  {
-    "type": "Feature",
-    "geometry":  {
-      "type": "Point",
-      "coordinates": [5.2795,52.1933]
-    },
-    "properties": {
-      "naam": "Paleis Soestdijk",
-      ...
-    }
-  }
-  </pre>
-  Example: POST feature collection
-  <pre class="example">
-  // POST /collections   HTTP/1.1
-  // Content-Type: application/geo+json
-  {
-    "type": "FeatureCollection",
-    "features": [
-    {
-      "type": "Feature",
-      "geometry":  {
-        "type": "Point",
-        "coordinates": [5.2795,52.1933]
-      },
-      "properties": {
-        "naam": "Paleis Soestdijk",
-        ...
-      }
-    }]
-  }
-  </pre>
-  <h4 class="rulelab">How to test</h4>
-  <ul>
-    <li>Create a new resource that includes feature content (i.e. coordinates) using the HTTP POST method with request media type <code>application/geo+json</code> in the <code>Content-Type</code> header.</li>
-    <li>Validate that a response with status code <code>201</code> (Created) is returned.</li>
-    <li>Validate that the response includes the <code>Location</code> header with the URI of the newly added resource.
-  </ul>
+  <dl>
+    <dt>Statement</dt>
+    <dd>
+      For representing geometric information in an API, use the convention for describing geometry as defined in the GeoJSON format [[rfc7946]]. Support GeoJSON as described in <a href="https://docs.ogc.org/DRAFTS/20-002r1.html">OGC API Features part 4</a>, but note that this standard is still in development.
+      <div class="example">
+        POST feature
+        <pre><code class="json">
+          // POST /collections/gebouwen/items   HTTP/1.1
+          // Content-Type: application/geo+json
+          {
+            "type": "Feature",
+            "geometry":  {
+              "type": "Point",
+              "coordinates": [5.2795,52.1933]
+            },
+            "properties": {
+              "naam": "Paleis Soestdijk",
+              ...
+            }
+          }
+        </code></pre>
+      </div>
+      <div class="example">
+        POST feature collection
+        <pre><code class="json">
+          // POST /collections   HTTP/1.1
+          // Content-Type: application/geo+json
+          {
+            "type": "FeatureCollection",
+            "features": [
+            {
+              "type": "Feature",
+              "geometry":  {
+                "type": "Point",
+                "coordinates": [5.2795,52.1933]
+              },
+              "properties": {
+                "naam": "Paleis Soestdijk",
+                ...
+              }
+            }]
+          }
+        </code></pre>
+      </div>
+    </dd>
+    <dt>How to test</dt>
+    <dd>
+      <ol>
+        <li>Create a new resource that includes feature content (i.e. coordinates) using the HTTP POST method with request media type <code>application/geo+json</code> in the <code>Content-Type</code> header.</li>
+        <li>Validate that a response with status code <code>201</code> (Created) is returned.</li>
+        <li>Validate that the response includes the <code>Location</code> header with the URI of the newly added resource.
+      </ol>
+    </dd>
+  </dl>
 </div>
 
 In case a REST API does not have to comply to the OGC API Features specification, e.g. for usage in administrative applications, the REST API shall use the JSON data format. If a resource contains geometry, that geometry shall be embedded as a GeoJSON <code>Geometry</code> object within the resource. The media type <code>application/json</code> must be supported. This may also apply to other media types <code>application/*+json</code>, however this depends on the media type specification. If the media type specification prescribes that resource information must be embedded in a JSON structure defined in the media specification, then the media type should not be supported while it is impossible to comply to that specification with the method described below. The media type <code>application/geo+json</code> should not be supported while the resource does not comply to the GeoJSON specification, i.e. the request resource does not embed a feature or feature collection.
@@ -202,43 +226,53 @@ In case a collection of resources is embedded in the request resource, the name 
 
 <div class="rule" id="/geo/embed-geojson-geometry-request">
   <p class="rulelab"><b>/geo/embed-geojson-geometry-request</b>: Embed GeoJSON <code>Geometry</code> object as part of the JSON resource in API requests</p>
-  <p>When a JSON (<code>application/json</code>) request contains a geometry, represent it in the same way as the <code>Geometry</code> object of GeoJSON.</p>
-  Example: POST resource containing geometry
-  <pre class="example">
-  // POST /collections/gebouwen/items   HTTP/1.1
-  // Content-Type: application/json
-  {
-    "naam": "Paleis Soestdijk",
-    "geometrie": {
-      "type": "Point",
-      "coordinates": [5.2795,52.1933]
-    }
-  }
-  </pre>
-  Example: POST resource containing geometry collection
-  <pre class="example">
-  // POST /collections/gebouwen/items   HTTP/1.1
-  // Content-Type: application/json
-  {
-    "naam": "Paleis Soestdijk",
-    "geometrie": {
-      "type": "GeometryCollection",
-      "geometries": [
-        {
-          "type": "Point",
-          "coordinates": [5.2795,52.1933]
-        }
-      ]
-    }
-  }
-  </pre>
-
-  <h4 class="rulelab">How to test</h4>
-  <ul>
-    <li>Create a new resource that includes geometry of GeoJSON <code>Geometry</code> object type using the HTTP POST method with request media type <code>application/json</code> in the <code>Content-Type</code> header.</li>
-    <li>Validate that a response with status code <code>201</code> (Created) is returned.</li>
-    <li>Validate that the response includes the <code>Location</code> header with the URI of the newly added resource.
-  </ul>
+  <dl>
+    <dt>Statement</dt>
+    <dd>
+      When a JSON (<code>application/json</code>) request contains a geometry, represent it in the same way as the <code>Geometry</code> object of GeoJSON.
+      <div class="example">
+        POST resource containing geometry
+        <pre><code class="json">
+          // POST /collections/gebouwen/items   HTTP/1.1
+          // Content-Type: application/json
+          {
+            "naam": "Paleis Soestdijk",
+            "geometrie": {
+              "type": "Point",
+              "coordinates": [5.2795,52.1933]
+            }
+          }
+        </code></pre>
+      </div>
+      <div class="example">
+        POST resource containing geometry collection
+        <pre><code class="json">
+          // POST /collections/gebouwen/items   HTTP/1.1
+          // Content-Type: application/json
+          {
+            "naam": "Paleis Soestdijk",
+            "geometrie": {
+              "type": "GeometryCollection",
+              "geometries": [
+                {
+                  "type": "Point",
+                  "coordinates": [5.2795,52.1933]
+                }
+              ]
+            }
+          }
+        </code></pre>
+      </div>
+    </dd>
+    <dt>How to test</dt>
+    <dd>
+      <ol>
+        <li>Create a new resource that includes geometry of GeoJSON <code>Geometry</code> object type using the HTTP POST method with request media type <code>application/json</code> in the <code>Content-Type</code> header.</li>
+        <li>Validate that a response with status code <code>201</code> (Created) is returned.</li>
+        <li>Validate that the response includes the <code>Location</code> header with the URI of the newly added resource.
+      </ol>
+    </dd>
+  </dl>
 </div>
 
 ## Result (response)
@@ -247,119 +281,113 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
 
 <div class="rule" id="/geo/geojson-response">
   <p class="rulelab"><b>/geo/geojson-response</b>: Support GeoJSON in geospatial API responsess</p>
-  <p>For representing 2D geometric information in an API response, use the convention for describing geometry as defined in the GeoJSON format [[rfc7946]]. Support GeoJSON as described in OGC API Features <a href="https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geojson">Requirements class 8.3</a> [[ogcapi-features-1]]. </p>
-  Example: feature
-  <pre class="example">
-  Request:
-  // GET /collections/gebouwen/items/0308100000022041   HTTP 1.1
-  // Content-type: application/geo+json
-
-  Response:
-  {
-    "type": "Feature",
-    "id": "0308100000022041",
-    "geometry":  {
-      "type": "Point",
-      "coordinates": [5.2795,52.1933]
-    },
-    "properties": {
-      "naam": "Paleis Soestdijk",
-      ...
-    },
-    "links": [
-      {
-        "self": "/collections/gebouwen/items/0308100000022041"
-      }
-    ]
-  }</pre>
-
-  Example: feature collection
-  <pre class="example">
-  Request:
-  // GET /collections/gebouwen   HTTP 1.1
-  // Content-type: application/geo+json
-
-  Response:
-  {
-    "type": "FeatureCollection",
-    "features": [
-      {
-        "type": "Feature",
-        "id": "0308100000022041",
-        "geometry":  {
-          "type": "Point",
-          "coordinates": [5.2795,52.1933]
-        },
-        "properties": {
-          "naam": "Paleis Soestdijk",
-          ...
-        },
-        "links": [
+  <dl>
+    <dt>Statement</dt>
+    <dd>
+      For representing 2D geometric information in an API response, use the convention for describing geometry as defined in the GeoJSON format [[rfc7946]]. Support GeoJSON as described in OGC API Features <a href="https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geojson">Requirements class 8.3</a> [[ogcapi-features-1]].
+      <div class="example">
+        Feature
+        <pre><code class="json">
+          // GET /collections/gebouwen/items/0308100000022041   HTTP 1.1
+          // Content-type: application/geo+json
           {
-            "self": "/collections/gebouwen/0308100000022041"
+            "type": "Feature",
+            "id": "0308100000022041",
+            "geometry":  {
+              "type": "Point",
+              "coordinates": [5.2795,52.1933]
+            },
+            "properties": {
+              "naam": "Paleis Soestdijk",
+              ...
+            },
+            "links": [
+              {
+                "self": "/collections/gebouwen/items/0308100000022041"
+              }
+            ]
           }
-        ]
-      },
-      {
-      }
-    ],
-    "timeStamp" : "2023-02-22T10:32:23Z",
-    "numberMatched" : "0308100000022041",
-    "numberReturned" : "1",
-    "links": [
-      {
-        "self": "/collections/gebouwen"
-      },
-      {
-        "next": ""
-      }
-    ]
-  }</pre>
-  <p>
-  Note that:
-
-- The resources' properties (e.g. <code>naam</code>) are passed in the properties object. Depending on the implemented filter capabilities the properties object may contain all or a selection of the resources' properties.
-- The OGC API Features specification provides the possibility to add an array of links to a feature and feature collection, which may contain a self link and in case of a feature collection may contain navigation links.
-
-  </p>
-  <h4 class="rulelab">How to test</h4>
-  <p>
-  Test case 1:
-  </p>
-  <ul>
-    <li>Request a single resource that includes feature content (i.e. coordinates) with response media type <code>application/geo+json</code> in the <code>Accept</code> header.</li>
-    <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/geo+json</code></li>
-    <li>Validate that the returned document is a GeoJSON Feature document.</li>
-  </ul>
-  <p>
-  Test case 2:
-  </p>
-  <ul>
-    <li>Request a collection of resources that includes feature content (i.e. coordinates) with response media type <code>application/geo+json</code> in the <code>Accept</code> header.</li>
-    <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/geo+json</code></li>
-    <li>Validate that the returned document is a GeoJSON FeatureCollection document.</li>
-  </ul>
-  <p>
-  Test case 3:
-  </p>
-  <ul>
-    <li>Request a single resource that does not include feature content (i.e. coordinates) with response media type <code>application/geo+json</code> or <code>application/json</code> in the <code>Accept</code> header.</li>
-    <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
-    <li>Validate that the returned document is a JSON document.</li>
-  </ul>
-  <p>
-  Test case 4:
-  </p>
-  <ul>
-    <li>Request a collection of resources that do not include feature content (i.e. coordinates) with response media type <code>application/geo+json</code> or <code>application/json</code> in the <code>Accept</code> header.</li>
-    <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
-    <li>Validate that the returned document is a JSON document.</li>
-  </ul>
-
+        </code></pre>
+      </div>
+      <div class="example">
+        Feature collection
+        <pre><code class="json">
+          // GET /collections/gebouwen   HTTP 1.1
+          // Content-type: application/geo+json
+          {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
+                "id": "0308100000022041",
+                "geometry":  {
+                  "type": "Point",
+                  "coordinates": [5.2795,52.1933]
+                },
+                "properties": {
+                  "naam": "Paleis Soestdijk",
+                  ...
+                },
+                "links": [
+                  {
+                    "self": "/collections/gebouwen/0308100000022041"
+                  }
+                ]
+              },
+              {
+              }
+            ],
+            "timeStamp" : "2023-02-22T10:32:23Z",
+            "numberMatched" : "0308100000022041",
+            "numberReturned" : "1",
+            "links": [
+              {
+                "self": "/collections/gebouwen"
+              },
+              {
+                "next": ""
+              }
+            ]
+          }
+        </code></pre>
+      </div>
+      <div class="note">
+        <li>The resources' properties (e.g. <code>naam</code>) are passed in the properties object. Depending on the implemented filter capabilities the properties object may contain all or a selection of the resources' properties.</li>
+        <li>The OGC API Features specification provides the possibility to add an array of links to a feature and feature collection, which may contain a self link and in case of a feature collection may contain navigation links</li>
+      </div>
+    </dd>
+    <dt>How to test</dt>
+    <dd>
+      Test case 1:
+      <ol>
+        <li>Request a single resource that includes feature content (i.e. coordinates) with response media type <code>application/geo+json</code> in the <code>Accept</code> header.</li>
+        <li>Validate that a response with status code 200 is returned.</li>
+        <li>Validate that <code>Content-Type</code> header contains <code>application/geo+json</code></li>
+        <li>Validate that the returned document is a GeoJSON Feature document.</li>
+      </ol>
+      Test case 2:
+      <ol>
+        <li>Request a collection of resources that includes feature content (i.e. coordinates) with response media type <code>application/geo+json</code> in the <code>Accept</code> header.</li>
+        <li>Validate that a response with status code 200 is returned.</li>
+        <li>Validate that <code>Content-Type</code> header contains <code>application/geo+json</code></li>
+        <li>Validate that the returned document is a GeoJSON FeatureCollection document.</li>
+      </ol>
+      Test case 3:
+      <ol>
+        <li>Request a single resource that does not include feature content (i.e. coordinates) with response media type <code>application/geo+json</code> or <code>application/json</code> in the <code>Accept</code> header.</li>
+        <li>Validate that a response with status code 200 is returned.</li>
+        <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
+        <li>Validate that the returned document is a JSON document.</li>
+      </ol>
+      Test case 4:
+      <ol>
+        <li>Request a collection of resources that do not include feature content (i.e. coordinates) with response media type <code>application/geo+json</code> or <code>application/json</code> in the <code>Accept</code> header.</li>
+        <li>Validate that a response with status code 200 is returned.</li>
+        <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
+        <li>Validate that the returned document is a JSON document.</li>
+      </ol>
+    </dd>
+  </dl>
 </div>
 
 In case a REST API does not have to comply to the OGC API Features specification, e.g. for usage in administrative applications, the REST API shall use the JSON data format. If resources contain geometry, the geometry shall be returned as a GeoJSON <code>Geometry</code> object embedded in the resource. The media type <code>application/json</code>  must be supported. This may also apply to other media types <code>application/\*+json</code>, however this depends on the media type specification. If the media type specification prescribes that resource information must be embedded in a JSON structure defined in the media type specification, then the media type should not be supported while it is impossible to comply to that specification with the method described below. The media type <code>application/geo+json</code> should not be supported while the resource does not comply to the GeoJSON specification, i.e. the response does not return a feature or feature collection.
@@ -369,157 +397,147 @@ In case a collection of resources is returned, the name of the array containing 
 <span name="api-35"></span>
 <div class="rule" id="/geo/embed-geojson-geometry-response">
   <p class="rulelab"><b>/geo/embed-geojson-geometry-response</b>: Embed GeoJSON <code>Geometry</code> object as part of the JSON resource in API responses</p>
-  <p>When a JSON (<code>application/json</code>) response contains a geometry, represent it in the same way as the <code>Geometry</code> object of GeoJSON.</p>
-
-  Example: resource containing geometry
-  <pre class="example">
-  Request:
-  // GET /gebouwen/0308100000022041   HTTP 1.1
-  // Content-type: application/hal+json
-
-  Response:
-  {
-    "identificatie": "0308100000022041",
-    "naam": "Paleis Soestdijk",
-    "geometrie":  {
-      "type": "Point",
-      "coordinates": [5.2795,52.1933]
-    },
-    ...,
-    "_links": {
-      {
-        "self": "/gebouwen/0308100000022041"
-      }
-    }
-  }</pre>
-
- Example: resource containing geometry collection
-  <pre class="example">
-  Request:
-  // GET /gebouwen/0308100000022041   HTTP 1.1
-  // Content-type: application/hal+json
-
-  Response:
-  {
-    "identificatie": "0308100000022041",
-    "naam": "Paleis Soestdijk",
-    "geometrie": {
-      "type": "GeometryCollection",
-      "geometries": [
-        {
-          "type": "Point"
-          "coordinates": [5.2795,52.1933]
-        },
-        {
-          "type": "Polygon"
-          "coordinates" : [...]
-        }
-      ]
-    },
-    ...,
-    "_links": {
-      {
-        "self": "/gebouwen/0308100000022041"
-      }
-    }
-  }</pre>
-
-  Example: collection of resources containing geometry
-  <pre class="example">
-  Request:
-  // GET /gebouwen   HTTP 1.1
-  // Content-type: application/hal+json
-
-  Response:
-  {
-    "gebouwen": [
-      {
-        "identificatie": "0308100000022041",
-        "naam": "Paleis Soestdijk",
-        "geometrie":  {
-          "type": "Point",
-          "coordinates": [5.2795,52.1933]
-        }
-        ...
-        "_links": {
+  <dl>
+    <dt>Statement</dt>
+    <dd>
+      When a JSON (<code>application/json</code>) response contains a geometry, represent it in the same way as the <code>Geometry</code> object of GeoJSON.
+      <div class="example">
+        Resource containing geometry
+        <pre><code class="json">
+          // GET /gebouwen/0308100000022041   HTTP 1.1
+          // Content-type: application/hal+json
           {
-            "self": "/gebouwen/0308100000022041"
+            "identificatie": "0308100000022041",
+            "naam": "Paleis Soestdijk",
+            "geometrie":  {
+              "type": "Point",
+              "coordinates": [5.2795,52.1933]
+            },
+            ...,
+            "_links": {
+              {
+                "self": "/gebouwen/0308100000022041"
+              }
+            }
           }
-        }
-      }
-    ],
-    "_links": {
-      {
-        "self": "/gebouwen"
-      },
-      {
-        "next": ""
-      }
-    }
-  }</pre>
-  <p>
-  Note that:
-
-- The resource and resource collection may be [[HAL]] resources and therefore may contain a `_links` object. The `_links` object should contain a self link and in case of a collection also navigation links (e.g. first, next prev, last). In such cases the <code>application/hal+json</code> media type may be used.
-
-  </p>
-  <h4 class="rulelab">How to test</h4>
-  <p>
-  Test case 1:
-  </p>
-  <ul>
-    <li>Request a single resource that contains geometry of GeoJSON <code>Geometry</code> object type: <code>Point</code>, <code>MultiPoint</code>, <code>LineString</code>, <code>MultiLineString</code>, <code>Polygon</code> or <code>MultiPolygon</code> and with response media type <code>application/json</code> in the <code>Accept</code> header.</li>
-    <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
-    <li>Validate that the returned document is a JSON document.</li>
-    <li>Validate that the returned document contains a property that complies to one of the GeoJSON <code>Geometry</code> objects mentioned above and contains:
-    <ul>
-      <li>a property <code>type</code> containing the name of one of the GeoJSON <code>Geometry</code> object types mentioned above, and</li>
-      <li>a property <code>coordinates</code> containing an array with the coordinates. Depending on the type of geometry object, the content of the array differs.</li>
-    </ul></li>
-  </ul>
-  <p>
-  Test case 2:
-  </p>
-  <ul>
-    <li>Request a collection of resources that contain geometry of GeoJSON <code>Geometry</code> object type: <code>Point</code>, <code>MultiPoint</code>, <code>LineString</code>, <code>MultiLineString</code>, <code>Polygon</code> or <code>MultiPolygon</code> and with response media type <code>application/json</code> in the <code>Accept</code> header.</li>
-    <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
-    <li>Validate that the returned document is a JSON document.</li>
-    <li>Validate that the returned document contains an array of resources and that each resource contains a property that complies to one of the GeoJSON <code>Geometry</code> objects mentioned above and contains:
-    <ul>
-      <li>a property <code>type</code> containing the name of one of the GeoJSON <code>Geometry</code> object types mentioned above, and</li>
-      <li>a property <code>coordinates</code> containing an array with the coordinates. Depending on the type of geometry object, the content of the array differs.</li>
-    </ul></li>
-  </ul>
-  <p>
-  Test case 3:
-  </p>
-  <ul>
-    <li>Request a single resource that contains geometry of GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code> and with response media type <code>application/json</code> in the <code>Accept</code> header.</li>
-    <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
-    <li>Validate that the returned document is a JSON document.</li>
-    <li>Validate that the returned document contains a property that complies to the GeoJSON <code>Geometry</code> object mentioned above and contains:
-    <ul>
-      <li>a property <code>type</code> containing the name of the GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code>, and</li>
-      <li>a property <code>geometries</code> containing an array of GeoJSON <code>Geometry</code> objects.</li>
-    </ul></li>
-  </ul>
-  <p>
-  Test case 4:
-  </p>
-  <ul>
-    <li>Request a collection of resources that contain geometry of GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code> and with response media type <code>application/json</code> in the <code>Accept</code> header.</li>
-    <li>Validate that a response with status code 200 is returned.</li>
-    <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
-    <li>Validate that the returned document is a JSON document.</li>
-    <li>Validate that the returned document contains an array of resources and that each resource contains a  property that complies to the GeoJSON <code>Geometry</code> object mentioned above and contains:
-      <ul>
-        <li>a property <code>type</code> containing the name of the GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code>, and</li>
-        <li>a property <code>geometries</code> containing an array of GeoJSON <code>Geometry</code> objects.</li>
-      </ul>
-    </li>
-  </ul>
-
+        </code></pre>
+      </div>
+      <div class="example">
+        Resource containing geometry collection
+        <pre><code class="json">
+          // GET /gebouwen/0308100000022041   HTTP 1.1
+          // Content-type: application/hal+json
+          {
+            "identificatie": "0308100000022041",
+            "naam": "Paleis Soestdijk",
+            "geometrie": {
+              "type": "GeometryCollection",
+              "geometries": [
+                {
+                  "type": "Point"
+                  "coordinates": [5.2795,52.1933]
+                },
+                {
+                  "type": "Polygon"
+                  "coordinates" : [...]
+                }
+              ]
+            },
+            ...,
+            "_links": {
+              {
+                "self": "/gebouwen/0308100000022041"
+              }
+            }
+          }
+        </code></pre>
+      </div>
+      <div class="example">
+        Collection of resources containing geometry
+        <pre><code class="json">
+          // GET /gebouwen   HTTP 1.1
+          // Content-type: application/hal+json
+          {
+            "gebouwen": [
+              {
+                "identificatie": "0308100000022041",
+                "naam": "Paleis Soestdijk",
+                "geometrie":  {
+                  "type": "Point",
+                  "coordinates": [5.2795,52.1933]
+                }
+                ...
+                "_links": {
+                  {
+                    "self": "/gebouwen/0308100000022041"
+                  }
+                }
+              }
+            ],
+            "_links": {
+              {
+                "self": "/gebouwen"
+              },
+              {
+                "next": ""
+              }
+            }
+          }
+        </code></pre>
+      </div>
+      <p class="note">The resource and resource collection may be [[HAL]] resources and therefore may contain a `_links` object. The `_links` object should contain a self link and in case of a collection also navigation links (e.g. first, next prev, last). In such cases the <code>application/hal+json</code> media type may be used.
+    </dd>
+    <dt>How to test</dt>
+    <dd>
+      Test case 1:
+      <ol>
+        <li>Request a single resource that contains geometry of GeoJSON <code>Geometry</code> object type: <code>Point</code>, <code>MultiPoint</code>, <code>LineString</code>, <code>MultiLineString</code>, <code>Polygon</code> or <code>MultiPolygon</code> and with response media type <code>application/json</code> in the <code>Accept</code> header.</li>
+        <li>Validate that a response with status code 200 is returned.</li>
+        <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
+        <li>Validate that the returned document is a JSON document.</li>
+        <li>Validate that the returned document contains a property that complies to one of the GeoJSON <code>Geometry</code> objects mentioned above and contains:
+        <ul>
+          <li>a property <code>type</code> containing the name of one of the GeoJSON <code>Geometry</code> object types mentioned above, and</li>
+          <li>a property <code>coordinates</code> containing an array with the coordinates. Depending on the type of geometry object, the content of the array differs.</li>
+        </ul></li>
+      </ol>
+      Test case 2:
+      <ol>
+        <li>Request a collection of resources that contain geometry of GeoJSON <code>Geometry</code> object type: <code>Point</code>, <code>MultiPoint</code>, <code>LineString</code>, <code>MultiLineString</code>, <code>Polygon</code> or <code>MultiPolygon</code> and with response media type <code>application/json</code> in the <code>Accept</code> header.</li>
+        <li>Validate that a response with status code 200 is returned.</li>
+        <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
+        <li>Validate that the returned document is a JSON document.</li>
+        <li>Validate that the returned document contains an array of resources and that each resource contains a property that complies to one of the GeoJSON <code>Geometry</code> objects mentioned above and contains:
+        <ul>
+          <li>a property <code>type</code> containing the name of one of the GeoJSON <code>Geometry</code> object types mentioned above, and</li>
+          <li>a property <code>coordinates</code> containing an array with the coordinates. Depending on the type of geometry object, the content of the array differs.</li>
+        </ul></li>
+      </ol>
+      Test case 3:
+      <ol>
+        <li>Request a single resource that contains geometry of GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code> and with response media type <code>application/json</code> in the <code>Accept</code> header.</li>
+        <li>Validate that a response with status code 200 is returned.</li>
+        <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
+        <li>Validate that the returned document is a JSON document.</li>
+        <li>Validate that the returned document contains a property that complies to the GeoJSON <code>Geometry</code> object mentioned above and contains:
+        <ul>
+          <li>a property <code>type</code> containing the name of the GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code>, and</li>
+          <li>a property <code>geometries</code> containing an array of GeoJSON <code>Geometry</code> objects.</li>
+        </ul></li>
+      </ol>
+      Test case 4:
+      <ol>
+        <li>Request a collection of resources that contain geometry of GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code> and with response media type <code>application/json</code> in the <code>Accept</code> header.</li>
+        <li>Validate that a response with status code 200 is returned.</li>
+        <li>Validate that <code>Content-Type</code> header contains <code>application/json</code></li>
+        <li>Validate that the returned document is a JSON document.</li>
+        <li>Validate that the returned document contains an array of resources and that each resource contains a  property that complies to the GeoJSON <code>Geometry</code> object mentioned above and contains:
+          <ul>
+            <li>a property <code>type</code> containing the name of the GeoJSON <code>Geometry</code> object type: <code>GeometryCollection</code>, and</li>
+            <li>a property <code>geometries</code> containing an array of GeoJSON <code>Geometry</code> objects.</li>
+          </ul>
+        </li>
+      </ol>
+    </dd>
+  </dl>
 </div>
