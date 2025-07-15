@@ -70,8 +70,8 @@ GeoJSON does not cover all use cases. For example, it is not possible to store c
 
 A simple spatial filter can be supplied as a bounding box. This is a common way of filtering spatial data and can be supplied as a parameter. We adopt the OGC API Features [[ogcapi-features-1]] bounding box parameter:
 
-<div class="rule" id="/geo/bbox-query-parameter">
-  <p class="rulelab"><b>/geo/bbox-query-parameter</b>: Supply a simple spatial filter as a bounding box parameter</p>
+<div class="rule" id="/geo/bbox-query-parameter" data-type="technical">
+  <p class="rulelab">Supply a simple spatial filter as a bounding box parameter</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -112,8 +112,8 @@ However, until the filtering module is written, the geospatial module retains ru
 </aside>
 
 <span name="api-38"></span>
-<div class="rule" id="/geo/geometric-context">
-  <p class="rulelab"><b>/geo/geometric-context</b>: Place results of a global spatial query in the relevant geometric context</p>
+<div class="rule" id="/geo/geometric-context" data-type="technical">
+  <p class="rulelab">Place results of a global spatial query in the relevant geometric context</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -162,8 +162,8 @@ However, until the filtering module is written, the geospatial module retains ru
 In case a REST API shall comply to the OGC API Features specification for creating, updating and deleting a resource, the following applies.
 
 <span name="api-34"></span>
-<div class="rule" id="/geo/geojson-request">
-  <p class="rulelab"><b>/geo/geojson-request</b>: Support GeoJSON in geospatial API requests</p>
+<div class="rule" id="/geo/geojson-request" data-type="technical">
+  <p class="rulelab">Support GeoJSON in geospatial API requests</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -224,8 +224,8 @@ In case a REST API does not have to comply to the OGC API Features specification
 A template for the definition of the schemas for the GeoJSON <code>Geometry</code> object in the requests in OpenAPI definitions is available: [geometryGeoJSON.yaml](https://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/geometryGeoJSON.yaml).
 In case a collection of resources is embedded in the request resource, the name of the array containing the resources should be the plural of the resource name.
 
-<div class="rule" id="/geo/embed-geojson-geometry-request">
-  <p class="rulelab"><b>/geo/embed-geojson-geometry-request</b>: Embed GeoJSON <code>Geometry</code> object as part of the JSON resource in API requests</p>
+<div class="rule" id="/geo/embed-geojson-geometry-request" data-type="technical">
+  <p class="rulelab">Embed GeoJSON <code>Geometry</code> object as part of the JSON resource in API requests</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -279,8 +279,8 @@ In case a collection of resources is embedded in the request resource, the name 
 
 In case a REST API shall comply to the OGC API Features specification, e.g. for usage in GIS applications, the following applies.
 
-<div class="rule" id="/geo/geojson-response">
-  <p class="rulelab"><b>/geo/geojson-response</b>: Support GeoJSON in geospatial API responsess</p>
+<div class="rule" id="/geo/geojson-response" data-type="technical">
+  <p class="rulelab">Support GeoJSON in geospatial API responsess</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -395,8 +395,8 @@ A template for the definition of the schemas for the GeoJSON <code>Geometry</cod
 In case a collection of resources is returned, the name of the array containing the resources should be the plural of the resource name.
 
 <span name="api-35"></span>
-<div class="rule" id="/geo/embed-geojson-geometry-response">
-  <p class="rulelab"><b>/geo/embed-geojson-geometry-response</b>: Embed GeoJSON <code>Geometry</code> object as part of the JSON resource in API responses</p>
+<div class="rule" id="/geo/embed-geojson-geometry-response" data-type="technical">
+  <p class="rulelab">Embed GeoJSON <code>Geometry</code> object as part of the JSON resource in API responses</p>
   <dl>
     <dt>Statement</dt>
     <dd>

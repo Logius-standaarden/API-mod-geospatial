@@ -15,8 +15,8 @@ For a detailed description of CRSs see [[hr-crs]].
 
 A client shall be able to determine a list of CRSs supported by an API.
 
-<div class="rule" id="/geo/crs-list">
-  <p class="rulelab"><b>/geo/crs-list</b>: Provide a list of all CRSs that are supported by the API</p>
+<div class="rule" id="/geo/crs-list" data-type="functional">
+  <p class="rulelab">Provide a list of all CRSs that are supported by the API</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -60,8 +60,8 @@ A client shall be able to determine a list of CRSs supported by an API.
   </dl>
 </div>
 
-<div class="rule" id="/geo/storage-crs">
-  <p class="rulelab"><b>/geo/storage-crs</b>: Make known in which CRS the geospatial data is stored by specifying the property <code>storageCrs</code> in the collection object</p>
+<div class="rule" id="/geo/storage-crs" data-type="technical">
+  <p class="rulelab">Make known in which CRS the geospatial data is stored by specifying the property <code>storageCrs</code> in the collection object</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -86,8 +86,8 @@ The default CRS for GeoJSON and for OGC API Features is CRS84 (OGC:CRS84), this 
 When referring to a coordinate reference system using its code in the rest of this chapter, this is meant to refer to both the 2D and 3D variant of the system in question. E.g. when "RD" is mentioned, this should be taken to mean "RD or RDNAP"; when WGS 84 is mentioned, this should be taken to mean "CRS84 or CRS84h". Each variant has an identifier.
 </aside>
 
-<div class="rule" id="/geo/default-crs">
-  <p class="rulelab"><b>/geo/default-crs</b>: Use <a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84">CRS84</a> as the default coordinate reference system (CRS) in line with OGC API Features <a href="http://docs.ogc.org/is/17-069r3/17-069r3.html#_coordinate_reference_systems">Requirement 10</a></p>
+<div class="rule" id="/geo/default-crs" data-type="technical">
+  <p class="rulelab">Use <a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84">CRS84</a> as the default coordinate reference system (CRS) in line with OGC API Features <a href="http://docs.ogc.org/is/17-069r3/17-069r3.html#_coordinate_reference_systems">Requirement 10</a></p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -110,8 +110,8 @@ When referring to a coordinate reference system using its code in the rest of th
 </div>
 
 <span name="api-39"></span>
-<div class="rule" id="/geo/preferred-crs">
-  <p class="rulelab"><b>/geo/preferred-crs</b>: Use ETRS89 and/or RD when required</p>
+<div class="rule" id="/geo/preferred-crs" data-type="functional">
+  <p class="rulelab">Use ETRS89 and/or RD when required</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -144,8 +144,8 @@ The guiding principles for CRS support:
 - APIs shall support and advertise both ensemble CRSs and ensemble member CRSs if geometry is exchanged and the CRS for the geometry is an ensemble member CRS.
 - Under certain conditions WGS 84 can be made equal to e.g. ETRS89, this is called a 'null transformation', see [[hr-crs]]. If a null transformation is used to realize WGS 84, then the CRS (e.g. ETRS89) that is used to realize WGS 84 and the CRS for WGS 84 itself shall both be supported and advertised by an API.
 
-<div class="rule" id="/geo/ensemble-member-crs">
-  <p class="rulelab"><b>/geo/ensemble-member-crs</b>: The ensemble member should be one of the CRSs supported by the API</p>
+<div class="rule" id="/geo/ensemble-member-crs" data-type="technical">
+  <p class="rulelab">The ensemble member should be one of the CRSs supported by the API</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -163,8 +163,8 @@ The guiding principles for CRS support:
   </dl>
 </div>
 
-<div class="rule" id="/geo/bbox-crs-query-parameter">
-  <p class="rulelab"><b>/geo/bbox-crs-query-parameter</b>: Support passing the coordinate reference system (CRS) of the bounding box in the request as a query parameter</p>
+<div class="rule" id="/geo/bbox-crs-query-parameter" data-type="technical">
+  <p class="rulelab">Support passing the coordinate reference system (CRS) of the bounding box in the request as a query parameter</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -183,8 +183,8 @@ The guiding principles for CRS support:
   </dl>
 </div>
 
-<div class="rule" id="/geo/filter-crs-query-parameter">
-  <p class="rulelab"><b>/geo/filter-crs-query-parameter</b>: Support passing the coordinate reference system (CRS) of the geospatial filter in the request as a query parameter</p>
+<div class="rule" id="/geo/filter-crs-query-parameter" data-type="technical">
+  <p class="rulelab">Support passing the coordinate reference system (CRS) of the geospatial filter in the request as a query parameter</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -205,8 +205,8 @@ The guiding principles for CRS support:
 
 In an API that supports the creation and/or updating of items, POST, PUT or PATCH requests with geospatial content in the body may be sent by a client to the server. In that case, it is necessary to indicate the CRS used, unless CRS84 (OGC:CRS84), the default CRS, is used.
 
-<div class="rule" id="/geo/content-crs-request-header">
-  <p class="rulelab"><b>/geo/content-crs-request-header</b>: When HTTP POST, PUT and/or PATCH requests are supported, pass the coordinate reference system (CRS) of geometry in the request body as a header</p>
+<div class="rule" id="/geo/content-crs-request-header" data-type="technical">
+  <p class="rulelab">When HTTP POST, PUT and/or PATCH requests are supported, pass the coordinate reference system (CRS) of geometry in the request body as a header</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -225,8 +225,8 @@ In an API that supports the creation and/or updating of items, POST, PUT or PATC
   </dl>
 </div>
 
-<div class="rule" id="/geo/crs-query-parameter">
-  <p class="rulelab"><b>/geo/crs-query-parameter</b>: Support passing the desired coordinate reference system (CRS) of the geometry in the response as a query parameter</p>
+<div class="rule" id="/geo/crs-query-parameter" data-type="technical">
+  <p class="rulelab">Support passing the desired coordinate reference system (CRS) of the geometry in the response as a query parameter</p>
   <dl>
     <dt>Statement</dt>
     <dd>
@@ -242,8 +242,8 @@ In an API that supports the creation and/or updating of items, POST, PUT or PATC
   </dl>
 </div>
 
-<div class="rule" id="/geo/content-crs-response-header">
-  <p class="rulelab"><b>/geo/content-crs-response-header</b>: Assert the coordinate reference system (CRS) used in the response using a header</p>
+<div class="rule" id="/geo/content-crs-response-header" data-type="technical">
+  <p class="rulelab">Assert the coordinate reference system (CRS) used in the response using a header</p>
   <dl>
     <dt>Statement</dt>
     <dd>

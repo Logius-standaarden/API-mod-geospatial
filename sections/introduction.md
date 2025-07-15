@@ -14,3 +14,11 @@ Geospatial data is 'special' data in the sense that it typically indicates the l
 </figure>
 
 The Geospatial Module provides rules for the structuring of geospatial payloads and for functions in APIs to handle geospatial data.
+
+## Functional rules
+
+<ul id="functionalList"></ul>
+
+## Technical rules
+
+<ul id="technicalList"></ul>
