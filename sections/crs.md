@@ -261,30 +261,30 @@ In an API that supports the creation and/or updating of items, POST, PUT or PATC
 
 The API should be able to handle the following scenarios based on the rules stated above:
 
-| Scenario                                        | Explanation |
-| ----------------------------------------------- | ----------- |
-| No geometry in request, no geometry in response | No CRS negotiation necessary |
-| No geometry in request, geometry in response    | The client can request a specific CRS for the geometries in the response using the `crs` parameter. The server indicates the geometry CRS in the response using the `Content-Crs` header. |
-| Geometry in request body, no geometry in response | The client indicates the CRS of the geometry in the request body using the `Content-Crs` header. |
-| Geometry in request body, geometry in response | The client indicates the CRS of the geometry in the request body using the `Content-Crs` header, and can request a specific CRS for the geometries in the response using the `crs` parameter. The server indicates the geometry CRS in the response using the `Content-Crs` header. |
-| Geometry filter in request, no geometry in response    | The client indicates the CRS of the geometry filter in the request using the `bbox-crs` parameter if a bounding box is used to filter geospatially, or the `filter-crs` parameter if another way of geospatial filtering is used.|
-| Geometry filter in request, geometry in response       | The client indicates the CRS of the geometry filter in the request using `bbox-crs` or `filter-crs` as in the previous scenario, and requests a specific CRS for the geometries in the response using the `crs` parameter. The server indicates the geometry CRS in response using the `Content-Crs` header.|
+| Scenario                                            | Explanation                                                                                                                                                                                                                                                                                                  |
+|-----------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| No geometry in request, no geometry in response     | No CRS negotiation necessary                                                                                                                                                                                                                                                                                 |
+| No geometry in request, geometry in response        | The client can request a specific CRS for the geometries in the response using the `crs` parameter. The server indicates the geometry CRS in the response using the `Content-Crs` header.                                                                                                                    |
+| Geometry in request body, no geometry in response   | The client indicates the CRS of the geometry in the request body using the `Content-Crs` header.                                                                                                                                                                                                             |
+| Geometry in request body, geometry in response      | The client indicates the CRS of the geometry in the request body using the `Content-Crs` header, and can request a specific CRS for the geometries in the response using the `crs` parameter. The server indicates the geometry CRS in the response using the `Content-Crs` header.                          |
+| Geometry filter in request, no geometry in response | The client indicates the CRS of the geometry filter in the request using the `bbox-crs` parameter if a bounding box is used to filter geospatially, or the `filter-crs` parameter if another way of geospatial filtering is used.                                                                            |
+| Geometry filter in request, geometry in response    | The client indicates the CRS of the geometry filter in the request using `bbox-crs` or `filter-crs` as in the previous scenario, and requests a specific CRS for the geometries in the response using the `crs` parameter. The server indicates the geometry CRS in response using the `Content-Crs` header. |
 
 Below is a list of the most commonly used CRSs in the Netherlands:
 
-| Name | Code | Type | Dimension | Scope | URI |
-|-|-|-|-|-|-|
-| Amersfoort / RD New | 28992 | easting, northing (x, y) | 2D | Dutch | <https://www.opengis.net/def/crs/EPSG/9.9.1/28992> |
-| Amersfoort / RD New + NAP height | 7415 | easting, northing, height (x, y, h) | 3D | Dutch | <https://www.opengis.net/def/crs/EPSG/9.9.1/7415> |
-| ETRS89 | 4258 | latitude, longitude (&#966;, &#955;) |2D | European | <https://www.opengis.net/def/crs/EPSG/9.9.1/4258> |
-| ETRS89 | 4937 | latitude, longitude, height (&#966;, &#955;, h) | 3D | European | <https://www.opengis.net/def/crs/EPSG/9.9.1/4937> |
-| ETRF2000 | 7931 | latitude, longitude, height (&#966;, &#955;, h) | 3D | European | <https://www.opengis.net/def/crs/EPSG/9.9.1/7931> |
-| ETRF2000 | 9067 | latitude, longitude (&#966;, &#955;) | 2D | European | <https://www.opengis.net/def/crs/EPSG/9.9.1/9067> |
-| ITRF2014 | 7912 | latitude, longitude, height (&#966;, &#955;, h) | 3D | Global | <https://www.opengis.net/def/crs/EPSG/9.9.1/7912> |
-| ITRF2014 | 9000 | latitude, longitude (&#966;, &#955;) | 2D | Global | <https://www.opengis.net/def/crs/EPSG/9.9.1/9000> |
-| WGS 84 longitude-latitude | CRS84 | longitude, latitude (&#955;, &#966;) | 2D | Global | <https://www.opengis.net/def/crs/OGC/1.3/CRS84> |
-| WGS 84 longitude-latitude-height | CRS84h | longitude, latitude, height (&#955;, &#966;, h) | 3D | Global | <https://www.opengis.net/def/crs/OGC/0/CRS84h> |
-| WGS 84 / Pseudo-Mercator | 3857 | easting, northing (x, y) | 2D | Global | <https://www.opengis.net/def/crs/EPSG/9.9.1/3857> |
+| Name                             | Code   | Type                                  | Dimension | Scope    | URI |
+|----------------------------------|--------|---------------------------------------|-----------|----------|-----|
+| Amersfoort / RD New              | 28992  | easting, northing (x, y)              | 2D        | Dutch    |     |
+| Amersfoort / RD New + NAP height | 7415   | easting, northing, height (x, y, h)   | 3D        | Dutch    |     |
+| ETRS89                           | 4258   | latitude, longitude (φ, λ)            | 2D        | European |     |
+| ETRS89                           | 4937   | latitude, longitude, height (φ, λ, h) | 3D        | European |     |
+| ETRF2000                         | 7931   | latitude, longitude, height (φ, λ, h) | 3D        | European |     |
+| ETRF2000                         | 9067   | latitude, longitude (φ, λ)            | 2D        | European |     |
+| ITRF2014                         | 7912   | latitude, longitude, height (φ, λ, h) | 3D        | Global   |     |
+| ITRF2014                         | 9000   | latitude, longitude (φ, λ)            | 2D        | Global   |     |
+| WGS 84 longitude-latitude        | CRS84  | longitude, latitude (λ, φ)            | 2D        | Global   |     |
+| WGS 84 longitude-latitude-height | CRS84h | longitude, latitude, height (λ, φ, h) | 3D        | Global   |     |
+| WGS 84 / Pseudo-Mercator         | 3857   | easting, northing (x, y)              | 2D        | Global   |     |
 
 For a more extensive overview of CRSs see: <https://docs.geostandaarden.nl/crs/crs/#bijlage-a-crs-overzicht-tabel>.
 Note that the URI of each CRS contains a version number and that new versions may be released in future.
