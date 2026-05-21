@@ -14,7 +14,7 @@ The Geospatial Module is focused on JSON-based encoding of data. However, consid
 
 ## GeoJSON
 
-[[rfc7946]] describes the GeoJSON format, including a convention for describing 2D geometric objects in CRS84 (OGC:CRS84). In the Geospatial module of the API strategy we adopt the GeoJSON conventions for describing geometry objects. The convention is extended to allow alternative projections.
+[[RFC7946]] describes the GeoJSON format, including a convention for describing 2D geometric objects in CRS84 (OGC:CRS84). In the Geospatial module of the API strategy we adopt the GeoJSON conventions for describing geometry objects. The convention is extended to allow alternative projections.
 The GeoJSON conventions and extensions described in this module apply to both geometry passed in input parameters and responses.
 
 <aside class="note">
@@ -167,7 +167,7 @@ In case a REST API shall comply to the OGC API Features specification for creati
   <dl>
     <dt>Statement</dt>
     <dd>
-      For representing geometric information in an API, use the convention for describing geometry as defined in the GeoJSON format [[rfc7946]]. Support GeoJSON as described in <a href="https://docs.ogc.org/DRAFTS/20-002r1.html">OGC API Features part 4</a>, but note that this standard is still in development.
+      For representing geometric information in an API, use the convention for describing geometry as defined in the GeoJSON format [[RFC7946]]. Support GeoJSON as described in <a href="https://docs.ogc.org/DRAFTS/20-002r1.html">OGC API Features part 4</a>, but note that this standard is still in development.
       <aside class="example">
         POST feature
         <pre><code class="json">
@@ -284,7 +284,7 @@ In case a REST API shall comply to the OGC API Features specification, e.g. for 
   <dl>
     <dt>Statement</dt>
     <dd>
-      For representing 2D geometric information in an API response, use the convention for describing geometry as defined in the GeoJSON format [[rfc7946]]. Support GeoJSON as described in OGC API Features <a href="https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geojson">Requirements class 8.3</a> [[ogcapi-features-1]].
+      For representing 2D geometric information in an API response, use the convention for describing geometry as defined in the GeoJSON format [[RFC7946]]. Support GeoJSON as described in OGC API Features <a href="https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geojson">Requirements class 8.3</a> [[ogcapi-features-1]].
       <aside class="example">
         Feature
         <pre><code class="json">
