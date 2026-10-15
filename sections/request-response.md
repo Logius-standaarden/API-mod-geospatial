@@ -76,7 +76,7 @@ If one or more of these capabilities are applicable JSON-FG is a recommended enc
 
 ### GML
 
-Geografy Markup Language is also based on [iso-19136-2007].
+Geography Markup Language is also based on [iso-19136-2007].
 
 The most recent and officialy published GML-specification is:
 
