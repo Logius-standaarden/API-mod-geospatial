@@ -82,9 +82,6 @@ If the time element is used, it is not clear which time type it concerns. Theref
   }
   </pre>
 
-
-timeType: "validity" 
-
 ### GML
 
 Geography Markup Language is also based on [iso-19136-2007].
