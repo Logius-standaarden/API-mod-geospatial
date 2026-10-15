@@ -72,7 +72,7 @@ JSON-FG offers the following additional capabilities beyond those of GeoJSON:
 5) Linear referencing using measures (e.g., indicating a location along a linear feature like a highway using hectometer markers).
 6) Specification of the feature type and its associated schema. This enables the automatic assignment of a map layer in a viewer based on the feature type. It also allows multiple featuretypes to be included in a single file.
 
-If one or more of these capabilities are applicable JSON-FG is a recommanded encoding.
+If one or more of these capabilities are applicable JSON-FG is a recommended encoding.
 
 ### GML
 
