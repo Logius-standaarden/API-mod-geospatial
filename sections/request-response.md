@@ -74,6 +74,9 @@ JSON-FG offers the following additional capabilities beyond those of GeoJSON:
 
 If one or more of these capabilities are applicable, JSON-FG is a recommended encoding.
 
+If the time element is used, it is not clear which time type it concerns. Therefore it is recommended to use an extra element in the endpoint of the collections to indicate the used time type. 
+'timeType: "validity"' 
+
 ### GML
 
 Geography Markup Language is also based on [iso-19136-2007].
