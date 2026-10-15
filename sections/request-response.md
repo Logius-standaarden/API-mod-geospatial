@@ -46,7 +46,7 @@ The GeoJSON conventions and extensions described in this module apply to both ge
 GeoJSON does not cover all use cases. For example, it is not possible to store circular arc geometries or solids in GeoJSON. In such cases, there are several valid options:
 
 - Use alternative standardized formats for geospatial data, such as:  
-   - [OGC JSON-FG](https://docs.ogc.org/is/21-045r1/21-045r1.html)
+   - [OGC JSON-FG](https://docs.ogc.org/is/21-045r1/21-045r1.html) as preferred alternative
    - [GML](https://docs.ogc.org/is/07-036r1/07-036r1/pdf)
    - [WKT](https://www.w3.org/TR/sdw-bp/#dfn-well-known-text-(wkt)) or its binary equivalent WKB
 - Use a workaround, e.g. convert circular lines / arcs to regular linestrings.
@@ -72,7 +72,7 @@ JSON-FG offers the following additional capabilities beyond those of GeoJSON:
 5) Linear referencing using measures (e.g., indicating a location along a linear feature like a highway using hectometer markers).
 6) Specification of the feature type and its associated schema. This enables the automatic assignment of a map layer in a viewer based on the feature type. It also allows multiple featuretypes to be included in a single file.
 
-If one or more of these capabilities are applicable JSON-FG is a recommended encoding.
+If one or more of these capabilities are applicable, JSON-FG is a recommended encoding.
 
 ### GML
 
