@@ -46,9 +46,9 @@ The GeoJSON conventions and extensions described in this module apply to both ge
 GeoJSON does not cover all use cases. For example, it is not possible to store circular arc geometries or solids in GeoJSON. In such cases, there are several valid options:
 
 - Use alternative standardized formats for geospatial data, such as:  
-   - [OGC JSON-FG](https://docs.ogc.org/is/21-045r1/21-045r1.html) as preferred alternative
-   - [GML](https://docs.ogc.org/is/07-036r1/07-036r1/pdf)
-   - [WKT](https://www.w3.org/TR/sdw-bp/#dfn-well-known-text-(wkt)) or its binary equivalent WKB
+  - [OGC JSON-FG](https://docs.ogc.org/is/21-045r1/21-045r1.html) as preferred alternative
+  - [GML](https://docs.ogc.org/is/07-036r1/07-036r1/pdf)
+  - [WKT](https://www.w3.org/TR/sdw-bp/#dfn-well-known-text-(wkt)) or its binary equivalent WKB
 - Use a workaround, e.g. convert circular lines / arcs to regular linestrings.
 
 ### JSON-FG
