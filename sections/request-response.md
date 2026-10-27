@@ -12,21 +12,95 @@ When requesting information, for example about cadastral parcels, users do not n
 The Geospatial Module is focused on JSON-based encoding of data. However, consider also supporting <code>text/html</code>, as recommended in OGC API Features [[ogcapi-features-1]]. Sharing data on the Web should include publication in HTML, as this allows discovery of the data through common search engines as well as viewing the data directly in a browser.
 </aside>
 
-## GeoJSON
+## Encoding
+
+The Core requirements class of the OGC API Features standard includes recommendations to support HTML and GeoJSON as encodings, where practical.
+The supported encoding should be indicated in the link section of the the collection/items and collection/items/{featuresId} endpoint.
+
+<p>Below you find an example of such a link section for GeoJSON and JSON-FG:</p>
+  <pre class="example">
+{
+  "links": [
+    {
+      "href": ".../items?f=json",
+      "rel": "alternate",
+      "type": "application/geo+json"
+    },
+    {
+      "href": ".../items?f=jsonfg",
+      "rel": "alternate",
+      "type": "application/fg+json"
+    }
+  ]
+}
+  </pre>
+
+In addition, you must also include the same information in the OpenAPI definition via the content sections of responses.
+The supported encodings should also be mentioned in the corresponding conformance.
+
+### GeoJSON
 
 [[RFC7946]] describes the GeoJSON format, including a convention for describing 2D geometric objects in CRS84 (OGC:CRS84). In the Geospatial module of the API strategy we adopt the GeoJSON conventions for describing geometry objects. The convention is extended to allow alternative projections.
 The GeoJSON conventions and extensions described in this module apply to both geometry passed in input parameters and responses.
 
-<aside class="note">
 GeoJSON does not cover all use cases. For example, it is not possible to store circular arc geometries or solids in GeoJSON. In such cases, there are several valid options:
 
-- Use alternative standardized formats for geospatial data, such as [WKT](https://www.w3.org/TR/sdw-bp/#dfn-well-known-text-(wkt)) or its binary equivalent WKB; GML [iso-19136-2007]; or in future [OGC JSON-FG](https://docs.ogc.org/DRAFTS/21-045.html) (currently a draft standard).
-- When supporting GML, do this according to OGC API Features [Requirements class 8.4](https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_0) for GML Simple Features level 0, or [Requirements class 8.4](https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_2) for GML Simple Features level 2.
+- Use alternative standardized formats for geospatial data, such as:  
+  - [OGC JSON-FG](https://docs.ogc.org/is/21-045r1/21-045r1.html) as preferred alternative
+  - [GML](https://docs.ogc.org/is/07-036r1/07-036r1/pdf)
+  - [WKT](https://www.w3.org/TR/sdw-bp/#dfn-well-known-text-(wkt)) or its binary equivalent WKB
 - Use a workaround, e.g. convert circular lines / arcs to regular linestrings.
 
-</aside>
+### JSON-FG
 
-<p>Example of embedding WKT in a JSON object using the following definition for a JSON object:</p>
+JSON-FG files are also valid GeoJSON files. Elements have simply been added so that the GeoJSON elements do not interfere when JSON-FG's additional functionality is utilized.
+JSON-FG offers the following additional capabilities beyond those of GeoJSON:
+
+1) Coordinate reference systems other than WGS 84;
+2) Temporal data via a timestamp or interval;
+3) 3D capabilities via four new data types:  
+   - Polyhedron (composed of faces; see Figure 2)
+   - MultiPolyhedron
+   - Prism (base geometry with 'height from' and 'height to' as additional attributes; similar to 2.5D)
+   - MultiPrism
+4) Use of arcs via five new data types (see Figure 3):  
+   - CircularString
+   - CompoundCurve
+   - CurvePolygon
+   - MultiCurve
+   - MultiSurface
+5) Linear referencing using measures (e.g., indicating a location along a linear feature like a highway using hectometer markers).
+6) Specification of the feature type and its associated schema. This enables the automatic assignment of a map layer in a viewer based on the feature type. It also allows multiple featuretypes to be included in a single file.
+
+If one or more of these capabilities are applicable, JSON-FG is a recommended encoding.
+
+If the time element is used, it is not clear which time type it concerns. Therefore it is recommended to use an extra element in the endpoint of the collections to indicate the used time type.  
+
+  <pre class="example">
+  {
+    "timeType": "validity"
+  }
+  </pre>
+
+### GML
+
+Geography Markup Language is also based on [iso-19136-2007].
+
+The most recent and officialy published GML-specification is:
+
+GML 3.3 [Extended Schemas and Encoding Rules](https://docs.ogc.org/is/10-129r1/10-129r1/pdf)
+
+Most Dutch geo-standards (like the NEN 3610-profiles) are still based on GML 3.2.2:
+
+GML 3.2.2 [Encoding Standard](https://docs.ogc.org/is/07-036r1/07-036r1/pdf)
+
+When supporting GML, do this according to OGC API Features [Requirements class 8.4](https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_0) for GML Simple Features level 0, or [Requirements class 8.4](https://docs.ogc.org/is/17-069r3/17-069r3.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_2) for GML Simple Features level 2.
+
+### WKT/WKB
+
+You can embed the Well Known Text format inside a JSON geometry element. This can either be Ascii (WKT) or binary (WKB).
+
+<p>Below you find a JSON-schema example of embedding **WKT** in a JSON object using the following definition for a JSON object:</p>
   <pre class="example">
   building:
     type: object
@@ -37,7 +111,7 @@ GeoJSON does not cover all use cases. For example, it is not possible to store c
         type: string
         format: wkt
   </pre>
-<p>Sample response:</p>
+<p>Corresponding sample response:</p>
   <pre class="example">
   {
     "building": {
@@ -46,7 +120,7 @@ GeoJSON does not cover all use cases. For example, it is not possible to store c
   }
   </pre>
 
-<p>Example of embedding WKB in a JSON object using the following definition for a JSON object:</p>
+<p>Below you find a JSON-schema example of embedding **WKB** in a JSON object using the following definition for a JSON object:</p>
   <pre class="example">
   building:
     type: object
@@ -57,7 +131,7 @@ GeoJSON does not cover all use cases. For example, it is not possible to store c
         type: string
         format: wkb
   </pre>
-<p>Sample response:</p>
+<p>Corresponding sample response:</p>
   <pre class="example">
   {
     "building": {

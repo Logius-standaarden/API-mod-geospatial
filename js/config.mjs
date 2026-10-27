@@ -47,36 +47,36 @@ loadRespecWithConfiguration({
       publisher: "Geonovum",
     },
     "ogcapi-features-1": {
-      href: "http://docs.ogc.org/is/17-069r3/17-069r3.html",
+      href: "http://docs.ogc.org/is/17-069r4/17-069r4.html",
       title: "OGC API - Features - Part 1: Core",
       editors: ["Clemens Portele", "Panagiotis (Peter) A. Vretanos", "Charles Heazel"],
       status: "Approved",
       publisher: "Open Geospatial Consortium",
-      version: "1.0"
+      version: "1.0.1"
     },
     "ogcapi-features-2": {
-      href: "https://docs.ogc.org/is/18-058/18-058.html",
-      title: "OGC API - Features - Part 2: Coordinate Reference Systems by Reference",
+      href: "https://docs.ogc.org/is/18-058r1/18-058r1.html",
+      title: "OGC API - Features - Part 2: Coordinate Reference Systems by Reference corrigendum",
       editors: ["Clemens Portele", "Panagiotis (Peter) A. Vretanos"],
       status: "Approved",
       publisher: "Open Geospatial Consortium",
-      version: "1.0"
+      version: "1.0.1"
     },
     "ogcapi-features-3": {
       href: "https://docs.ogc.org/is/19-079r2/19-079r2.html",
       title: "OGC API - Features - Part 3: Filtering",
       editors: ["Panagiotis (Peter) A. Vretanos", "Clemens Portele"],
-      status: "Draft",
+      status: "Approved",
       publisher: "Open Geospatial Consortium",
       version: "1.0.0-rc.1"
     },
     "JSON-FG": {
-      href: "https://docs.ogc.org/DRAFTS/21-045.html",
+      href: "https://docs.ogc.org/is/21-045r1/21-045r1.html",
       title: "OGC Features and Geometries JSON - Part 1: Core",
       editors: ["Clemens Portele", "Panagiotis (Peter) A. Vretanos"],
-      status: "Editor's Draft",
+      status: "Approved",
       publisher: "Open Geospatial Consortium",
-      version: "0.1"
+      version: "1.0"
     },
     "HAL": {
       href: "http://stateless.co/hal_specification.html",
