@@ -45,8 +45,8 @@ The GeoJSON conventions and extensions described in this module apply to both ge
 
 <aside class="example">
 Point feature example in GeoJSON encoding
-<pre><code class="json">
-// Content-type: application/geo+json
+<pre class="http">HTTP/1.1 200 OK
+Content-Type: application/geo+json
 {
   "type": "FeatureCollection",
   "features": [
@@ -62,9 +62,7 @@ Point feature example in GeoJSON encoding
       }
     }
   ]
-}
-
-</code></pre>
+}</pre>
 </aside>
 
 GeoJSON does not cover all use cases. For example, it is not possible to store circular arc geometries or solids in GeoJSON. In such cases, there are several valid options:
@@ -100,8 +98,8 @@ If one or more of these capabilities are applicable, JSON-FG is a recommended en
 
 <aside class="example">
 Same point feature as in previous example but now in JSON-FG encoding with extra elements
-<pre><code class="json">
-// Content-type: application/fg+json
+<pre class="http">HTTP/1.1 200 OK
+Content-Type: application/fg+json
 {
   "type": "FeatureCollection",
   "timeStamp": "2026-06-25T13:03:30Z",
@@ -129,9 +127,7 @@ Same point feature as in previous example but now in JSON-FG encoding with extra
       }
     }
   ]
-}
-
-</code></pre>
+}</pre>
 </aside>
 
 If the time element is used, it is not clear which time type it concerns. Therefore it is recommended to use an extra element in the endpoint of the collections to indicate the used time type.  
