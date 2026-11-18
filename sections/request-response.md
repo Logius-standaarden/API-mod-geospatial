@@ -157,8 +157,7 @@ GML 3.2.2 [Encoding Standard](https://docs.ogc.org/is/07-036r1/07-036r1/pdf)
 When supporting GML, do this according to OGC API Features [Requirements class 8.4](https://docs.ogc.org/is/17-069r4/17-069r4.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_0) for GML Simple Features level 0, or [Requirements class 8.4](https://docs.ogc.org/is/17-069r4/17-069r4.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_2) for GML Simple Features level 2.
 
 Same point feature as in previous example but now in GML
-```
-// Content-type: application/gml+xml; version=3.2
+```// Content-type: application/gml+xml; version=3.2
 
 <?xml version="1.0" encoding="UTF-8"?>
 
@@ -167,16 +166,13 @@ Same point feature as in previous example but now in GML
     xmlns:app="http://example.org/gebouw"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     gml:id="fc-1">
-
     <gml:metaDataProperty>
         <app:CollectionMetadata>
             <app:timeStamp>2026-06-25T13:03:30Z</app:timeStamp>
         </app:CollectionMetadata>
     </gml:metaDataProperty>
-
     <gml:featureMember>
         <app:Gebouw gml:id="0308100000022041">
-
             <app:geometry>
                 <gml:Point
                     gml:id="geometry-0308100000022041"
@@ -185,7 +181,6 @@ Same point feature as in previous example but now in GML
                     <gml:pos>147636 467248 5</gml:pos>
                 </gml:Point>
             </app:geometry>
-
             <app:geometry2>
                 <gml:Point
                     gml:id="geometry2-0308100000022041"
@@ -194,12 +189,9 @@ Same point feature as in previous example but now in GML
                     <gml:pos>5.2795 52.1933</gml:pos>
                 </gml:Point>
             </app:geometry2>
-            
             <app:naam>Paleis Soestdijk</app:naam>
-
         </app:Gebouw>
     </gml:featureMember>
-
 </gml:FeatureCollection>
 ```
 
