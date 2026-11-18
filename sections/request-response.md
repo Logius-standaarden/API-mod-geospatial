@@ -50,17 +50,17 @@ Point feature example in GeoJSON encoding
 {
   "type": "FeatureCollection",
   "features": [
-	{
-	  "type": "Feature",
-	  "id": "0308100000022041",
-	  "geometry":  {
-		"type": "Point",
-		"coordinates": [5.2795,52.1933]
-	  },
-	  "properties": {
-		"naam": "Paleis Soestdijk"
-	  }
-	}
+    {
+      "type": "Feature",
+      "id": "0308100000022041",
+      "geometry":  {
+        "type": "Point",
+        "coordinates": [5.2795,52.1933]
+      },
+      "properties": {
+        "naam": "Paleis Soestdijk"
+      }
+    }
   ]
 }
 
@@ -111,29 +111,28 @@ Same point feature as in previous example but now in JSON-FG encoding with extra
     "http://www.opengis.net/spec/json-fg-1/1.0/conf/types-schemas"
   ],
   "features": [
-	{
-	  "type": "Feature",
-	  "id": "0308100000022041",
-	  "featureType": "Gebouw", 
-	  "time": null,
-	  "place": {
-		"type": "Point",
-		"coordinates": [147636, 467248, 5]
-	  },
-	  "geometry":  {
-		"type": "Point",
-		"coordinates": [5.2795, 52.1933]
-	  },
-	  "properties": {
-		"naam": "Paleis Soestdijk"
-	  }
-	}
+    {
+      "type": "Feature",
+      "id": "0308100000022041",
+      "featureType": "Gebouw",
+      "time": null,
+      "place": {
+        "type": "Point",
+        "coordinates": [147636, 467248, 5]
+      },
+      "geometry":  {
+        "type": "Point",
+        "coordinates": [5.2795, 52.1933]
+      },
+      "properties": {
+        "naam": "Paleis Soestdijk"
+      }
+    }
   ]
 }
 
 </code></pre>
 </aside>
-
 
 If the time element is used, it is not clear which time type it concerns. Therefore it is recommended to use an extra element in the endpoint of the collections to indicate the used time type.  
 
@@ -161,7 +160,7 @@ When supporting GML, do this according to OGC API Features [Requirements class 8
 Same point feature as in previous example but now in GML
 <pre><code class="xml">
 // Content-type: application/gml+xml; version=3.2
-
+```
 <?xml version="1.0" encoding="UTF-8"?>
 
 <gml:FeatureCollection
@@ -196,19 +195,16 @@ Same point feature as in previous example but now in GML
                     <gml:pos>5.2795 52.1933</gml:pos>
                 </gml:Point>
             </app:geometry2>
-			
+            
             <app:naam>Paleis Soestdijk</app:naam>
 
         </app:Gebouw>
     </gml:featureMember>
 
 </gml:FeatureCollection>
-
+```
 </code></pre>
 </aside>
-
-
-
 
 ### WKT/WKB
 
