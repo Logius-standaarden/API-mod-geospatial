@@ -156,11 +156,10 @@ GML 3.2.2 [Encoding Standard](https://docs.ogc.org/is/07-036r1/07-036r1/pdf)
 
 When supporting GML, do this according to OGC API Features [Requirements class 8.4](https://docs.ogc.org/is/17-069r4/17-069r4.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_0) for GML Simple Features level 0, or [Requirements class 8.4](https://docs.ogc.org/is/17-069r4/17-069r4.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_2) for GML Simple Features level 2.
 
-<aside class="example">
 Same point feature as in previous example but now in GML
-<pre><code class="xml">
-// Content-type: application/gml+xml; version=3.2
 ```
+// Content-type: application/gml+xml; version=3.2
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <gml:FeatureCollection
@@ -203,8 +202,6 @@ Same point feature as in previous example but now in GML
 
 </gml:FeatureCollection>
 ```
-</code></pre>
-</aside>
 
 ### WKT/WKB
 
