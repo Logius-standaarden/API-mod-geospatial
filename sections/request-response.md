@@ -99,6 +99,8 @@ If one or more of these capabilities are applicable, JSON-FG is a recommended en
 
 <aside class="example">
 Same point feature as in previous example but now in JSON-FG encoding with extra elements
+<!-- markdownlint-disable no-bare-urls -->
+<!-- Op de een of andere manier gaat markdownlint niet lekker op de eerste URL in dit voorbeeld, ook al moet hij daar niks mee doen. -->
 <pre class="http">HTTP/1.1 200 OK
 Content-Type: application/fg+json
 
@@ -130,6 +132,7 @@ Content-Type: application/fg+json
     }
   ]
 }</pre>
+<!-- markdownlint-enable no-bare-urls -->
 </aside>
 
 If the time element is used, it is not clear which time type it concerns. Therefore it is recommended to use an extra element in the endpoint of the collections to indicate the used time type.  
