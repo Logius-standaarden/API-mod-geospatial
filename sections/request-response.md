@@ -47,6 +47,7 @@ The GeoJSON conventions and extensions described in this module apply to both ge
 Point feature example in GeoJSON encoding
 <pre class="http">HTTP/1.1 200 OK
 Content-Type: application/geo+json
+
 {
   "type": "FeatureCollection",
   "features": [
@@ -100,6 +101,7 @@ If one or more of these capabilities are applicable, JSON-FG is a recommended en
 Same point feature as in previous example but now in JSON-FG encoding with extra elements
 <pre class="http">HTTP/1.1 200 OK
 Content-Type: application/fg+json
+
 {
   "type": "FeatureCollection",
   "timeStamp": "2026-06-25T13:03:30Z",
@@ -153,43 +155,42 @@ GML 3.2.2 [Encoding Standard](https://docs.ogc.org/is/07-036r1/07-036r1/pdf)
 When supporting GML, do this according to OGC API Features [Requirements class 8.4](https://docs.ogc.org/is/17-069r4/17-069r4.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_0) for GML Simple Features level 0, or [Requirements class 8.4](https://docs.ogc.org/is/17-069r4/17-069r4.html#_requirements_class_geography_markup_language_gml_simple_features_profile_level_2) for GML Simple Features level 2.
 
 Same point feature as in previous example but now in GML
-```// Content-type: application/gml+xml; version=3.2
+<pre class="http">HTTP/1.1 200 OK
+Content-type: application/xml; version=3.2
 
-<?xml version="1.0" encoding="UTF-8"?>
-
-<gml:FeatureCollection
+&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;gml:FeatureCollection
     xmlns:gml="http://www.opengis.net/gml/3.2"
     xmlns:app="http://example.org/gebouw"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     gml:id="fc-1">
-    <gml:metaDataProperty>
-        <app:CollectionMetadata>
-            <app:timeStamp>2026-06-25T13:03:30Z</app:timeStamp>
-        </app:CollectionMetadata>
-    </gml:metaDataProperty>
-    <gml:featureMember>
-        <app:Gebouw gml:id="0308100000022041">
-            <app:geometry>
-                <gml:Point
+    &lt;gml:metaDataProperty>
+        &lt;app:CollectionMetadata>
+            &lt;app:timeStamp>2026-06-25T13:03:30Z&lt;/app:timeStamp>
+        &lt;/app:CollectionMetadata>
+    &lt;/gml:metaDataProperty>
+    &lt;gml:featureMember>
+        &lt;app:Gebouw gml:id="0308100000022041">
+            &lt;app:geometry>
+                &lt;gml:Point
                     gml:id="geometry-0308100000022041"
                     srsName="http://www.opengis.net/def/crs/EPSG/0/7415"
                     srsDimension="3">
-                    <gml:pos>147636 467248 5</gml:pos>
-                </gml:Point>
-            </app:geometry>
-            <app:geometry2>
-                <gml:Point
+                    &lt;gml:pos>147636 467248 5&lt;/gml:pos>
+                &lt;/gml:Point>
+            &lt;/app:geometry>
+            &lt;app:geometry2>
+                &lt;gml:Point
                     gml:id="geometry2-0308100000022041"
                     srsName="http://www.opengis.net/def/crs/OGC/1.3/CRS84"
                     srsDimension="2">
-                    <gml:pos>5.2795 52.1933</gml:pos>
-                </gml:Point>
-            </app:geometry2>
-            <app:naam>Paleis Soestdijk</app:naam>
-        </app:Gebouw>
-    </gml:featureMember>
-</gml:FeatureCollection>
-```
+                    &lt;gml:pos>5.2795 52.1933&lt;/gml:pos>
+                &lt;/gml:Point>
+            &lt;/app:geometry2>
+            &lt;app:naam>Paleis Soestdijk&lt;/app:naam>
+        &lt;/app:Gebouw>
+    &lt;/gml:featureMember>
+&lt;/gml:FeatureCollection></pre>
 
 ### WKT/WKB
 
